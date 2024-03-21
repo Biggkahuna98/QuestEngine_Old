@@ -33,8 +33,8 @@ message("Building Quest Engine static library...")
 set (SOURCES
     include/QuestEngine.h
 
-    src/QTest.h
-    src/QTest.cpp
+    src/Core/QTest.h
+    src/Core/QTest.cpp
 )
 #file (GLOB_RECURSE SOURCES src/*.cpp src/*.h include/Quest.h include/QuestEntrypoint.h assets/shaders/*.vert assets/shaders/*.frag)
 #list(REMOVE_ITEM SOURCES src/qepch.h src/qepch.cpp)
