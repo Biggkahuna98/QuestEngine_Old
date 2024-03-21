@@ -8,3 +8,6 @@
 	path = vendor/engine/imgui
 	url = https://github.com/alexsederquest98/imgui.git
 	branch = docking
+[submodule "vendor/engine/spdlog"]
+	path = vendor/engine/spdlog
+	url = https://github.com/gabime/spdlog.git
