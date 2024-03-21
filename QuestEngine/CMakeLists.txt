@@ -31,10 +31,13 @@ set (QUEST_STATIC_LIBS
 message("Building Quest Engine static library...")
 
 set (SOURCES
+    # LIBRARY CONSUMER INCLUDES
     include/QuestEngine.h
+    include/QuestEngineEntrypoint.h
 
-    src/Core/QTest.h
-    src/Core/QTest.cpp
+    # CORE
+    src/Core/Application.h
+    src/Core/Application.cpp
 )
 #file (GLOB_RECURSE SOURCES src/*.cpp src/*.h include/Quest.h include/QuestEntrypoint.h assets/shaders/*.vert assets/shaders/*.frag)
 #list(REMOVE_ITEM SOURCES src/qepch.h src/qepch.cpp)

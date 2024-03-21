@@ -1,32 +1,23 @@
 #include "SandboxApp.h"
 
-#include <iostream>
 #include <QuestEngine.h>
-// #include <Quest.h>
-// #include <QuestEntrypoint.h>
+#include <QuestEngineEntrypoint.h>
 
-// SandboxApp::SandboxApp(Quest::Application::ApplicationSpecification spec)
-// 	: Quest::Application(spec), m_Specification(spec)
-// {
-// 	//QE_APP_INFO("Sandbox Application Constructor");
-// }
+#include <iostream>
 
-// SandboxApp::~SandboxApp()
-// {
-
-// }
-
-// Quest::ScopedPtr<Quest::Application> Quest::CreateApplication(Application::ApplicationSpecification spec) {
-// 	return Quest::CreateScope<SandboxApp>(spec);
-// } 
-
-void test()
+SandboxApp::SandboxApp()
+	: Quest::Application()
 {
-	std::cout << "Hello World!" << std::endl;
+	std::cout << "SandboxApp::SandboxApp\n";
 }
 
-int main(int argc, char** argv)
+SandboxApp::~SandboxApp()
 {
-	test();
-	std::cout << qtest() << std::endl;
+	std::cout << "SandboxApp::~SandboxApp\n";
+}
+
+
+std::unique_ptr<Quest::Application> CreateApplication()
+{
+	return std::make_unique<SandboxApp>();
 }
