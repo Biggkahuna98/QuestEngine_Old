@@ -1,1 +1,1 @@
-genbuild-vs.bat
+./scripts/genbuild-vs.bat
