@@ -8,7 +8,12 @@ namespace Quest
 	{
 	public:
 		Application();
-		virtual ~Application();
+		virtual ~Application() noexcept;
+		Application(const Application& other) = delete; // copy constructor
+		Application& operator=(const Application& other) = delete; // copy assignment
+		Application(Application&& other) noexcept = delete; // move constructor
+		Application& operator=(const Application&& other) noexcept = delete; // move assignment
+
 		void Test();
 	private:
 	};

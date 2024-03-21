@@ -9,13 +9,13 @@ namespace Quest
 		std::cout << "Application::Application\n";
 	}
 
-	Application::~Application()
+	Application::~Application() noexcept
 	{
 		std::cout << "Application::~Application\n";
 	}
 
 	void Application::Test()
 	{
-		std::cout << "Application::Test is successful" << std::endl;
+		std::cout << "Application::Test is successful\n";
 	}
 }
