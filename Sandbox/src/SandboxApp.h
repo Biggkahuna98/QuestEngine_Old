@@ -1,10 +1,10 @@
-#pragma once
+#pragma once // NOLINT
 
-#include <QuestEngine.h>
+#include <QuestEngine.h> // NOLINT
 
-class SandboxApp : public Quest::Application
+class SandboxApp : public Quest::Application //NOLINT
 {
 public:
 	SandboxApp();
-	~SandboxApp();
+	~SandboxApp() override;
 };

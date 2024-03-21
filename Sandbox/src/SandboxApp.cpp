@@ -1,14 +1,15 @@
+// NOLINTBEGIN
 #include "SandboxApp.h"
 
 #include <QuestEngine.h>
 #include <QuestEngineEntrypoint.h>
 
 #include <iostream>
+#include <memory>
 
-SandboxApp::SandboxApp()
-	: Quest::Application()
+SandboxApp::SandboxApp() : Quest::Application()
 {
-	std::cout << "SandboxApp::SandboxApp\n";
+	std::cout << "SandboxApp::SandboxApp\n"; 
 }
 
 SandboxApp::~SandboxApp()
@@ -17,7 +18,9 @@ SandboxApp::~SandboxApp()
 }
 
 
-std::unique_ptr<Quest::Application> CreateApplication()
-{
-	return std::make_unique<SandboxApp>();
+std::unique_ptr<Quest::Application> CreateApplication() 
+{ 
+	return std::make_unique<SandboxApp>(); 
 }
+
+// NOLINTEND
