@@ -9,8 +9,8 @@ find_package(Vulkan REQUIRED COMPONENTS glslc SPIRV-Tools shaderc_combined)
 #find_vulkan(REQUIRED COMPONENTS glslc glslang SPIRV-Tools shaderc_combined)
 
 if (NOT Vulkan_FOUND)
-    message(STATUS "Vulkan not found. Please install it.")
-    return()
+	message(STATUS "Vulkan not found. Please install it.")
+	return()
 endif()
 
 
@@ -24,68 +24,68 @@ endif()
 #add_subdirectory(QUEST_ROOT/Quest/vendor/yaml-cpp)
 
 set (QUEST_STATIC_LIBS
-    glfw
-    #VulkanRenderer
+	glfw
+	#VulkanRenderer
 )
 
 message("Building Quest Engine static library...")
 
 set (SOURCES
-    # LIBRARY CONSUMER INCLUDES
-    include/QuestEngine.h
-    include/QuestEngineEntrypoint.h
-
-    # CORE
-    src/Core/Application.h
-    src/Core/Application.cpp
+	# CORE
+	src/Core/Application.cpp
+	src/Core/Logger.cpp
 )
-#file (GLOB_RECURSE SOURCES src/*.cpp src/*.h include/Quest.h include/QuestEntrypoint.h assets/shaders/*.vert assets/shaders/*.frag)
+
+set (HEADERS
+	# LIBRARY INCLUDES
+	include/QuestEngine.h
+	include/QuestEngineEntrypoint.h
+	
+	# CORE
+	src/Core/Application.h
+	src/Core/Assert.h
+	src/Core/Logger.h
+)
+
+file (GLOB_RECURSE VS_TREE src/*.cpp src/*.h include/QuestEngine.h include/QuestEngineEntrypoint.h assets/shaders/*.vert assets/shaders/*.frag)
 #list(REMOVE_ITEM SOURCES src/qepch.h src/qepch.cpp)
 #file (GLOB_RECURSE HEADERS include/Quest.h src/*.h)
-set (HEADERS
-    include/
-    src/    
-)
 
 # vendor includes
 set(VENDOR_INCLUDES 
-    ${QUEST_ROOT}/vendor/engine/glfw/include/
-    #vendor/imgui/
-    ${QUEST_ROOT}/vendor/engine/glm/
-    #vendor/stb/
-    #vendor/tinyobjloader/
+	${QUEST_ROOT}/vendor/engine/glfw/include/
+	#vendor/imgui/
+	${QUEST_ROOT}/vendor/engine/glm/
+	${QUEST_ROOT}/vendor/engine/spdlog/include/
+	#vendor/stb/
+	#vendor/tinyobjloader/
 
-    #${QUEST_ROOT}/VulkanRenderer/include/
+	#${QUEST_ROOT}/VulkanRenderer/include/
 )
-
-#set(VENDOR_SOURCES
-    #vendor/glad/src/glad.c
-#)
 
 set(VULKAN_LIBRARIES
-    ${Vulkan_LIBRARY}
-    ${Vulkan_glslang_LIBRARY}
-    ${Vulkan_shaderc_combined_LIBRARY}
-    ${Vulkan_SPIRV-Tools_LIBRARY}
+	${Vulkan_LIBRARY}
+	${Vulkan_glslang_LIBRARY}
+	${Vulkan_shaderc_combined_LIBRARY}
+	${Vulkan_SPIRV-Tools_LIBRARY}
 )
 
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SOURCES})
-#source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${HEADERS})
-#set (SOURCES "src/TestLib.cpp")
-#set (HEADERS "src/TestLib.h")
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}  FILES ${VS_TREE})
 
 
-add_library(${TARGET_NAME} ${QUEST_LIBRARY_TYPE} ${SOURCES})
+add_library(${TARGET_NAME} ${QUEST_LIBRARY_TYPE} ${SOURCES} ${HEADERS})
 set_target_properties(${TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 #target_precompile_headers(${TARGET_NAME} 
 #    PRIVATE 
 #    "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/src/qepch.h>"
 #)
 
-target_compile_definitions(${TARGET_NAME} PRIVATE GLM_FORCE_DEPTH_ZERO_TO_ONE=1 _CRT_SECURE_NO_WARNINGS=1)
+target_compile_definitions(${TARGET_NAME} PRIVATE GLM_FORCE_DEPTH_ZERO_TO_ONE=1 _CRT_SECURE_NO_WARNINGS=1 QE_PLATFORM_WINDOWS=1)
+target_compile_definitions(${TARGET_NAME} PRIVATE $<$<CONFIG:DEBUG>:QE_DEBUG=1> $<$<CONFIG:RELWITHDEBINFO>:QE_DEBUG=1>)
 
 target_link_libraries(${TARGET_NAME} PRIVATE ${Vulkan_LIBRARIES} ${QUEST_STATIC_LIBS})
 
-target_include_directories(${TARGET_NAME} PUBLIC ${HEADERS} ${Vulkan_INCLUDE_DIR} ${VENDOR_INCLUDES})
+target_include_directories(${TARGET_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/ ${CMAKE_CURRENT_SOURCE_DIR}/include/ ${Vulkan_INCLUDE_DIR} ${VENDOR_INCLUDES})
+#target_include_directories(${TARGET_NAME} PUBLIC ${SOURCES} ${HEADERS} ${Vulkan_INCLUDE_DIR} ${VENDOR_INCLUDES})
 message("Done building Quest Engine")
 

@@ -12,8 +12,6 @@ ENDIF()
 project(QuestEngine CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(CMAKE_CXX_CLANG_TIDY "-Wno-pragma-once-outside-header")
-set(CMAKE_CXX_CLANG_TIDY "-checks=-modernize-use-pragma-once")
 
 # Set QUEST_ROOT from environment var
 set(QUEST_ROOT $ENV{QUEST_ENGINE_ROOT})
