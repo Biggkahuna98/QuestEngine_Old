@@ -1,92 +1,84 @@
 #include "Logger.h"
 
-#define _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS
 #include "spdlog/sinks/stdout_color_sinks.h"
 #include "spdlog/sinks/basic_file_sink.h"
-#undef _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS
 
 #include <filesystem>
 #include <vector>
 
 namespace Quest
 {
-	// Helper to convert Logger::Level -> spdlog::level
-	spdlog::level::level_enum InternalLevelToSPDLogLevel(Logger::Level level)
-	{
-		switch (level)
-		{
-		case Logger::Level::Trace:
-			return spdlog::level::trace;
-		case Logger::Level::Info:
-			return spdlog::level::info;
-		case Logger::Level::Warn:
-			return spdlog::level::warn;
-		case Logger::Level::Error:
-			return spdlog::level::err;
-		case Logger::Level::Fatal:
-			return spdlog::level::critical;
-		}
-	}
+	std::shared_ptr<spdlog::logger> Logger::s_CoreLogger;
+	std::shared_ptr<spdlog::logger> Logger::s_ClientLogger;
 
-	Logger::Logger(LoggerCreateInfo createInfo)
+	void Logger::Init()
 	{
-		// Create the provided log directory if it does not exist
-		if (!std::filesystem::exists(createInfo.logDirectory))
-			std::filesystem::create_directories(createInfo.logDirectory);
+		std::string logsDirectory = "logs";
+		if (!std::filesystem::exists(logsDirectory))
+			std::filesystem::create_directories(logsDirectory);
 
-		// Setup the sinks for spdlog
-		std::vector<spdlog::sink_ptr> coreSinks =
+		std::vector<spdlog::sink_ptr> engineSinks =
 		{
-			std::make_shared<spdlog::sinks::basic_file_sink_mt>(createInfo.logDirectory + "/" + createInfo.coreLoggerName, true),
+			std::make_shared<spdlog::sinks::basic_file_sink_mt>("logs/QUEST.log", true),
 			std::make_shared<spdlog::sinks::stdout_color_sink_mt>()
 		};
 
 		std::vector<spdlog::sink_ptr> clientSinks =
 		{
-			std::make_shared<spdlog::sinks::basic_file_sink_mt>(createInfo.logDirectory + "/" + createInfo.clientLoggerName, true),
+			std::make_shared<spdlog::sinks::basic_file_sink_mt>("logs/APP.log", true),
 			std::make_shared<spdlog::sinks::stdout_color_sink_mt>()
 		};
 
-		// Set the patterns
-		coreSinks[0]->set_pattern("[%T] [%l] %n: %v");
+		engineSinks[0]->set_pattern("[%T] [%l] %n: %v");
 		clientSinks[0]->set_pattern("[%T] [%l] %n: %v");
 
-		coreSinks[1]->set_pattern("%^[%T] %n: %v%$");
+		engineSinks[1]->set_pattern("%^[%T] %n: %v%$");
 		clientSinks[1]->set_pattern("%^[%T] %n: %v%$");
 
-		// Create the loggers
-		m_CoreLogger = std::make_shared<spdlog::logger>(createInfo.coreLoggerName, coreSinks.begin(), coreSinks.end());
-		m_CoreLogger->set_level(InternalLevelToSPDLogLevel(createInfo.coreLevel));
+		s_CoreLogger = std::make_shared<spdlog::logger>("QUEST", engineSinks.begin(), engineSinks.end());
+		s_CoreLogger->set_level(spdlog::level::trace);
 
-		m_ClientLogger = std::make_shared<spdlog::logger>(createInfo.clientLoggerName, clientSinks.begin(), clientSinks.end());
-		m_ClientLogger->set_level(InternalLevelToSPDLogLevel(createInfo.clientLevel));
+		s_ClientLogger = std::make_shared<spdlog::logger>("APP", clientSinks.begin(), clientSinks.end());
+		s_ClientLogger->set_level(spdlog::level::trace);
 	}
 
-	Logger::~Logger()
+	void Logger::Shutdown()
 	{
-		// Close down the spdlog loggers
-		m_CoreLogger.reset();
-		m_ClientLogger.reset();
+		s_ClientLogger.reset();
+		s_CoreLogger.reset();
 		spdlog::drop_all();
 	}
 
-	inline std::shared_ptr<spdlog::logger>& Logger::GetCoreLogger()
+	void TestLoggerMacros()
 	{
-		return m_CoreLogger;
-	}
+		// Core
+		QE_CORE_TRACE("{} {}", "Core:", "Trace");
+		QE_CORE_DEBUG("{} {}", "Core:", "Debug");
+		QE_CORE_INFO("{} {}", "Core:", "Info");
+		QE_CORE_WARN("{} {}", "Core:", "Warn");
+		QE_CORE_ERROR("{} {}", "Core:", "Error");
+		QE_CORE_FATAL("{} {}", "Core:", "Fatal");
 
-	inline std::shared_ptr<spdlog::logger>& Logger::GetClientLogger()
-	{
-		return m_ClientLogger;
-	}
+		QE_CORE_TRACE_TAG("Test", "{} {}", "Core Tag:", "Trace");
+		QE_CORE_DEBUG_TAG("Test", "{} {}", "Core Tag:", "Debug");
+		QE_CORE_INFO_TAG("Test", "{} {}", "Core Tag:", "Info");
+		QE_CORE_WARN_TAG("Test", "{} {}", "Core Tag:", "Warn");
+		QE_CORE_ERROR_TAG("Test", "{} {}", "Core Tag:", "Error");
+		QE_CORE_FATAL_TAG("Test", "{} {}", "Core Tag:", "Fatal");
 
-	void Logger::SetCoreLevel(Level level)
-	{
-		m_CoreLogger->set_level(InternalLevelToSPDLogLevel(level));
-	}
+		// Client
+		QE_TRACE("{} {}", "Client:", "Trace");
+		QE_DEBUG("{} {}", "Client:", "Debug");
+		QE_INFO("{} {}", "Client:", "Info");
+		QE_WARN("{} {}", "Client:", "Warn");
+		QE_ERROR("{} {}", "Client:", "Error");
+		QE_FATAL("{} {}", "Client:", "Fatal");
 
-	void Logger::SetClientLevel(Level level)
-	{
-		m_ClientLogger->set_level(InternalLevelToSPDLogLevel(level));
+		QE_TRACE_TAG("Test", "{} {}", "Client Tag:", "Trace");
+		QE_DEBUG_TAG("Test", "{} {}", "Client Tag:", "Debug");
+		QE_INFO_TAG("Test", "{} {}", "Client Tag:", "Info");
+		QE_WARN_TAG("Test", "{} {}", "Client Tag:", "Warn");
+		QE_ERROR_TAG("Test", "{} {}", "Client Tag:", "Error");
+		QE_FATAL_TAG("Test", "{} {}", "Client Tag:", "Fatal");
 	}
 }

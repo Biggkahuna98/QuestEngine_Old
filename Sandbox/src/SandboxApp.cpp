@@ -9,12 +9,11 @@
 
 SandboxApp::SandboxApp() : Quest::Application()
 {
-	std::cout << "SandboxApp::SandboxApp\n"; 
+	QE_TRACE_TAG("Sandbox", "App Constructor");
 }
 
 SandboxApp::~SandboxApp()
 {
-	std::cout << "SandboxApp::~SandboxApp\n";
 }
 
 

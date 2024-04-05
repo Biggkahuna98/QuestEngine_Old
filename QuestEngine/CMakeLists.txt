@@ -45,6 +45,10 @@ set (HEADERS
 	src/Core/Application.h
 	src/Core/Assert.h
 	src/Core/Logger.h
+
+	# UTLITY
+	#src/Utility/QLog/QLog.h
+	src/Utility/PathBuilder.h
 )
 
 file (GLOB_RECURSE VS_TREE src/*.cpp src/*.h include/QuestEngine.h include/QuestEngineEntrypoint.h assets/shaders/*.vert assets/shaders/*.frag)
@@ -56,6 +60,7 @@ set(VENDOR_INCLUDES
 	${QUEST_ROOT}/vendor/engine/glfw/include/
 	#vendor/imgui/
 	${QUEST_ROOT}/vendor/engine/glm/
+	${QUEST_ROOT}/vendor/engine/fmt/include/
 	${QUEST_ROOT}/vendor/engine/spdlog/include/
 	#vendor/stb/
 	#vendor/tinyobjloader/
@@ -80,8 +85,8 @@ set_target_properties(${TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 #    "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/src/qepch.h>"
 #)
 
-target_compile_definitions(${TARGET_NAME} PRIVATE GLM_FORCE_DEPTH_ZERO_TO_ONE=1 _CRT_SECURE_NO_WARNINGS=1 QE_PLATFORM_WINDOWS=1)
-target_compile_definitions(${TARGET_NAME} PRIVATE $<$<CONFIG:DEBUG>:QE_DEBUG=1> $<$<CONFIG:RELWITHDEBINFO>:QE_DEBUG=1>)
+target_compile_definitions(${TARGET_NAME} PRIVATE _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING GLM_FORCE_DEPTH_ZERO_TO_ONE=1 _CRT_SECURE_NO_WARNINGS=1 QE_PLATFORM_WINDOWS=1)
+target_compile_definitions(${TARGET_NAME} PRIVATE $<$<CONFIG:DEBUG>:QUEST_DEBUG_MODE=1> $<$<CONFIG:RELWITHDEBINFO>:QUEST_DEBUG_MODE=1>)
 
 target_link_libraries(${TARGET_NAME} PRIVATE ${Vulkan_LIBRARIES} ${QUEST_STATIC_LIBS})
 

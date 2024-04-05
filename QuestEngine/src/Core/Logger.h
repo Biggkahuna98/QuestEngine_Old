@@ -1,12 +1,11 @@
-#pragma once // NOLINT
+#pragma once
 
-#define _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS
 #include "spdlog/spdlog.h"
-#undef _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS
 
+#include <memory>
 #include <string>
 #include <string_view>
-#include <memory>
+#include <format>
 
 namespace Quest
 {
@@ -15,76 +14,150 @@ namespace Quest
 	public:
 		enum class Type : uint8_t
 		{
-			Core = 0, Client
+			Core = 0, Client = 1
 		};
 
 		enum class Level : uint8_t
 		{
-			Trace = 0, Info, Warn, Error, Fatal
+			Trace = 0, Debug, Info, Warn, Error, Fatal
 		};
 
-		struct LoggerCreateInfo
-		{
-			std::string coreLoggerName = "QUEST";
-			std::string clientLoggerName = "CLIENT";
-			std::string coreLogFileName = "Quest.log";
-			std::string clientLogFileName = "Client.log";
-			std::string logDirectory = "logs";
-			Level coreLevel = Level::Trace;
-			Level clientLevel = Level::Trace;
-		};
+		static void Init();
+		static void Shutdown();
 
-	public:
-		Logger(LoggerCreateInfo createInfo);
-		~Logger();
-
-		inline std::shared_ptr<spdlog::logger>& GetCoreLogger();
-		inline std::shared_ptr<spdlog::logger>& GetClientLogger();
-
-		void SetCoreLevel(Level level);
-		void SetClientLevel(Level level);
-
-		//template<typename... Args>
-		//void PrintMessage(Type type, Level level, std::string_view tag, std::string_view msg);
+		inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
+		inline static std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
 
 		template<typename... Args>
-		void PrintMessage(Type type, Level level, std::string_view tag, Args&&... args);
-		//void PrintMessage(Type type, std::string_view msg, Args&&... args);
+		static void PrintMessage(Logger::Type type, Logger::Level level, std::format_string<Args...> format, Args&&... args);
+
+		template<typename... Args>
+		static void PrintMessageTag(Logger::Type type, Logger::Level level, std::string_view tag, std::format_string<Args...> format, Args&&... args);
+
+		static void PrintMessageTag(Logger::Type type, Logger::Level level, std::string_view tag, std::string_view message);
+
 	private:
-		std::shared_ptr<spdlog::logger> m_CoreLogger;
-		std::shared_ptr<spdlog::logger> m_ClientLogger;
+		static std::shared_ptr<spdlog::logger> s_CoreLogger;
+		static std::shared_ptr<spdlog::logger> s_ClientLogger;
 	};
 
-	// TEMPLATE IMPLEMENTATIONS
-	template<typename ...Args>
-	inline void Logger::PrintMessage(Type type, Level level, std::string_view tag, Args&&... args)
+	void TestLoggerMacros();
+}
+
+//  PREFER TAGGED LOGS OVER NONTAGGED
+// Core logging
+#define QE_CORE_TRACE_TAG(tag, ...) ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Trace, tag, __VA_ARGS__)
+#define QE_CORE_DEBUG_TAG(tag, ...) ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Debug, tag, __VA_ARGS__)
+#define QE_CORE_INFO_TAG(tag, ...)  ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Info, tag, __VA_ARGS__)
+#define QE_CORE_WARN_TAG(tag, ...)  ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Warn, tag, __VA_ARGS__)
+#define QE_CORE_ERROR_TAG(tag, ...) ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Error, tag, __VA_ARGS__)
+#define QE_CORE_FATAL_TAG(tag, ...) ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Fatal, tag, __VA_ARGS__)
+
+// Client logging
+#define QE_TRACE_TAG(tag, ...) ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Trace, tag, __VA_ARGS__)
+#define QE_DEBUG_TAG(tag, ...) ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Debug, tag, __VA_ARGS__)
+#define QE_INFO_TAG(tag, ...)  ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Info, tag, __VA_ARGS__)
+#define QE_WARN_TAG(tag, ...)  ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Warn, tag, __VA_ARGS__)
+#define QE_ERROR_TAG(tag, ...) ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Error, tag, __VA_ARGS__)
+#define QE_FATAL_TAG(tag, ...) ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Fatal, tag, __VA_ARGS__)
+
+// Core Logging
+#define QE_CORE_TRACE(...)  ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Trace, __VA_ARGS__)
+#define QE_CORE_DEBUG(...)  ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Debug, __VA_ARGS__)
+#define QE_CORE_INFO(...)   ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Info, __VA_ARGS__)
+#define QE_CORE_WARN(...)   ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Warn, __VA_ARGS__)
+#define QE_CORE_ERROR(...)  ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Error, __VA_ARGS__)
+#define QE_CORE_FATAL(...)  ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Fatal, __VA_ARGS__)
+
+// Client logging
+#define QE_TRACE(...)  ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Trace, __VA_ARGS__)
+#define QE_DEBUG(...)  ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Debug, __VA_ARGS__)
+#define QE_INFO(...)   ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Info, __VA_ARGS__)
+#define QE_WARN(...)   ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Warn, __VA_ARGS__)
+#define QE_ERROR(...)  ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Error, __VA_ARGS__)
+#define QE_FATAL(...)  ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Fatal, __VA_ARGS__)
+
+namespace Quest
+{
+	template<typename... Args>
+	void Logger::PrintMessage(Logger::Type type, Logger::Level level, const std::format_string<Args...> format, Args&&... args)
 	{
-		// Select which logger based on tag
-		std::shared_ptr<spdlog::logger> logger = (type == Type::Core) ? GetCoreLogger() : GetClientLogger();
-		// Set the fmt string to be logged
-		std::string logString = tag.empty() ? "{0}{1}" : "[{0}] {1}";
+		auto logger = (type == Type::Core) ? GetCoreLogger() : GetClientLogger();
+		std::string formatted = std::format(format, std::forward<Args>(args)...);
 		switch (level)
 		{
 		case Level::Trace:
-			logger->trace(logString, tag, fmt::format(std::forward<Args>(args)...));
+			logger->trace(formatted);
+			break;
+		case Level::Debug:
+			logger->debug(formatted);
 			break;
 		case Level::Info:
-			logger->info(logString, tag, fmt::format(std::forward<Args>(args)...));
+			logger->info(formatted);
 			break;
 		case Level::Warn:
-			logger->warn(logString, tag, fmt::format(std::forward<Args>(args)...));
+			logger->warn(formatted);
 			break;
 		case Level::Error:
-			logger->error(logString, tag, fmt::format(std::forward<Args>(args)...));
+			logger->error(formatted);
 			break;
 		case Level::Fatal:
-			logger->critical(logString, tag, fmt::format(std::forward<Args>(args)...));
+			logger->critical(formatted);
 			break;
 		}
 	}
 
-	/*template<typename ...Args>
-	inline void Logger::PrintAssertMessage(Type type, std::string_view msg, Args&&... args)
+	template<typename... Args>
+	void Logger::PrintMessageTag(Logger::Type type, Logger::Level level, std::string_view tag, const std::format_string<Args...> format, Args&&... args)
 	{
-	}*/
+		auto logger = (type == Type::Core) ? GetCoreLogger() : GetClientLogger();
+		std::string formatted = std::format(format, std::forward<Args>(args)...);
+		switch (level)
+		{
+		case Level::Trace:
+			logger->trace("[{0}] {1}", tag, formatted);
+			break;
+		case Level::Debug:
+			logger->debug("[{0}] {1}", tag, formatted);
+			break;
+		case Level::Info:
+			logger->info("[{0}] {1}", tag, formatted);
+			break;
+		case Level::Warn:
+			logger->warn("[{0}] {1}", tag, formatted);
+			break;
+		case Level::Error:
+			logger->error("[{0}] {1}", tag, formatted);
+			break;
+		case Level::Fatal:
+			logger->critical("[{0}] {1}", tag, formatted);
+			break;
+		}
+	}
+
+	inline void Logger::PrintMessageTag(Logger::Type type, Logger::Level level, std::string_view tag, std::string_view message)
+	{
+		auto logger = (type == Type::Core) ? GetCoreLogger() : GetClientLogger();
+		switch (level)
+		{
+		case Level::Trace:
+			logger->trace("[{0}] {1}", tag, message);
+			break;
+		case Level::Debug:
+			logger->debug("[{0}] {1}", tag, message);
+			break;
+		case Level::Info:
+			logger->info("[{0}] {1}", tag, message);
+			break;
+		case Level::Warn:
+			logger->warn("[{0}] {1}", tag, message);
+			break;
+		case Level::Error:
+			logger->error("[{0}] {1}", tag, message);
+			break;
+		case Level::Fatal:
+			logger->critical("[{0}] {1}", tag, message);
+			break;
+		}
+	}
 }

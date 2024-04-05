@@ -11,3 +11,6 @@
 [submodule "vendor/engine/fmt"]
 	path = vendor/engine/fmt
 	url = https://github.com/fmtlib/fmt.git
+[submodule "vendor/engine/spdlog"]
+	path = vendor/engine/spdlog
+	url = https://github.com/gabime/spdlog.git
