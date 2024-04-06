@@ -24,13 +24,13 @@ namespace Quest
 
 		struct CreateInfo
 		{
-			std::string coreLoggerName = "QUEST";
-			std::string clientLoggerName = "APP";
-			std::string coreLogFileName = "Quest.log";
-			std::string clientLogFileName = "App.log";
-			std::string logsDirectory = "logs";
-			Level coreLevel = Level::Trace;
-			Level clientLevel = Level::Trace;
+			std::string coreLoggerName { "QUEST" };
+			std::string clientLoggerName { "APP" };
+			std::string coreLogFileName { "Quest.log" };
+			std::string clientLogFileName { "App.log" };
+			std::string logsDirectory { "logs" };
+			Level coreLevel { Level::Trace };
+			Level clientLevel { Level::Trace };
 		};
 
 		static void Init(Logger::CreateInfo ci);
