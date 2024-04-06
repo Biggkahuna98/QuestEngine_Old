@@ -22,7 +22,18 @@ namespace Quest
 			Trace = 0, Debug, Info, Warn, Error, Fatal
 		};
 
-		static void Init();
+		struct CreateInfo
+		{
+			std::string coreLoggerName = "QUEST";
+			std::string clientLoggerName = "APP";
+			std::string coreLogFileName = "Quest.log";
+			std::string clientLogFileName = "App.log";
+			std::string logsDirectory = "logs";
+			Level coreLevel = Level::Trace;
+			Level clientLevel = Level::Trace;
+		};
+
+		static void Init(Logger::CreateInfo ci);
 		static void Shutdown();
 
 		inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }

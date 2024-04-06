@@ -11,21 +11,25 @@ namespace Quest
 	std::shared_ptr<spdlog::logger> Logger::s_CoreLogger;
 	std::shared_ptr<spdlog::logger> Logger::s_ClientLogger;
 
-	void Logger::Init()
+	void Logger::Init(Logger::CreateInfo ci)
 	{
-		std::string logsDirectory = "logs";
-		if (!std::filesystem::exists(logsDirectory))
-			std::filesystem::create_directories(logsDirectory);
+		// Make sure the directory provided by the CI exists, otherwise create
+		if (!std::filesystem::exists(ci.logsDirectory))
+			std::filesystem::create_directories(ci.logsDirectory);
+
+		// Build the sink directories
+		const std::string coreLogFile = ci.logsDirectory + "/" + ci.coreLogFileName;
+		const std::string clientLogFile = ci.logsDirectory + "/" + ci.clientLogFileName;
 
 		std::vector<spdlog::sink_ptr> engineSinks =
 		{
-			std::make_shared<spdlog::sinks::basic_file_sink_mt>("logs/QUEST.log", true),
+			std::make_shared<spdlog::sinks::basic_file_sink_mt>(coreLogFile, true),
 			std::make_shared<spdlog::sinks::stdout_color_sink_mt>()
 		};
 
 		std::vector<spdlog::sink_ptr> clientSinks =
 		{
-			std::make_shared<spdlog::sinks::basic_file_sink_mt>("logs/APP.log", true),
+			std::make_shared<spdlog::sinks::basic_file_sink_mt>(clientLogFile, true),
 			std::make_shared<spdlog::sinks::stdout_color_sink_mt>()
 		};
 
@@ -35,10 +39,10 @@ namespace Quest
 		engineSinks[1]->set_pattern("%^[%T] %n: %v%$");
 		clientSinks[1]->set_pattern("%^[%T] %n: %v%$");
 
-		s_CoreLogger = std::make_shared<spdlog::logger>("QUEST", engineSinks.begin(), engineSinks.end());
+		s_CoreLogger = std::make_shared<spdlog::logger>(ci.coreLoggerName, engineSinks.begin(), engineSinks.end());
 		s_CoreLogger->set_level(spdlog::level::trace);
 
-		s_ClientLogger = std::make_shared<spdlog::logger>("APP", clientSinks.begin(), clientSinks.end());
+		s_ClientLogger = std::make_shared<spdlog::logger>(ci.clientLoggerName, clientSinks.begin(), clientSinks.end());
 		s_ClientLogger->set_level(spdlog::level::trace);
 	}
 
