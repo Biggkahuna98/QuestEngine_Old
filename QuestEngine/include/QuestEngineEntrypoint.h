@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Core/Application.h"
-#include "Core/Assert.h"
 #include "Core/Logger.h"
 
 
@@ -13,7 +12,6 @@ int main(int argc, char** argv)
 	// Initialize logger system before anything else
 	Quest::Logger::CreateInfo ci;
 	Quest::Logger::Init(ci);
-	QE_CORE_ASSERT(4 == 4, "fail");
 
 	// Create the application from the user-defined CreateApplication() in the consuming program
 	std::unique_ptr<Quest::Application> app = CreateApplication();

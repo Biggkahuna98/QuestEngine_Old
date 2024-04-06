@@ -47,7 +47,6 @@ set (HEADERS
 	src/Core/Logger.h
 
 	# UTLITY
-	#src/Utility/QLog/QLog.h
 	src/Utility/PathBuilder.h
 )
 

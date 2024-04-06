@@ -45,7 +45,10 @@ namespace Quest
 		template<typename... Args>
 		static void PrintMessageTag(Logger::Type type, Logger::Level level, std::string_view tag, std::format_string<Args...> format, Args&&... args);
 
-		static void PrintMessageTag(Logger::Type type, Logger::Level level, std::string_view tag, std::string_view message);
+		template<typename... Args>
+		static void PrintAssertMessage(Logger::Type type, std::string_view failurePrefix, std::format_string<Args...> format, Args&&... args);
+
+		//static void PrintMessageTag(Logger::Type type, Logger::Level level, std::string_view tag, std::string_view message);
 
 	private:
 		static std::shared_ptr<spdlog::logger> s_CoreLogger;
@@ -146,7 +149,7 @@ namespace Quest
 		}
 	}
 
-	inline void Logger::PrintMessageTag(Logger::Type type, Logger::Level level, std::string_view tag, std::string_view message)
+	/*inline void Logger::PrintMessageTag(Logger::Type type, Logger::Level level, std::string_view tag, std::string_view message)
 	{
 		auto logger = (type == Type::Core) ? GetCoreLogger() : GetClientLogger();
 		switch (level)
@@ -170,5 +173,13 @@ namespace Quest
 			logger->critical("[{0}] {1}", tag, message);
 			break;
 		}
+	}*/
+
+	template<typename... Args>
+	void Logger::PrintAssertMessage(Logger::Type type, std::string_view failurePrefix, std::format_string<Args...> format, Args&&... args)
+	{
+		auto logger = (type == Type::Core) ? GetCoreLogger() : GetClientLogger();
+		std::string formatted = std::format(format, std::forward<Args>(args)...);
+		logger->error("{0}: {1}", failurePrefix, formatted);
 	}
 }
