@@ -14,3 +14,6 @@
 [submodule "vendor/engine/spdlog"]
 	path = vendor/engine/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "vendor/engine/tracy"]
+	path = vendor/engine/tracy
+	url = https://github.com/wolfpld/tracy.git
