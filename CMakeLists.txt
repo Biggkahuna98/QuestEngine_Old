@@ -12,6 +12,7 @@ ENDIF()
 project(QuestEngine CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+add_definitions(-DTRACY_ENABLE=1)
 
 # Set QUEST_ROOT from environment var
 set(QUEST_ROOT $ENV{QUEST_ENGINE_ROOT})

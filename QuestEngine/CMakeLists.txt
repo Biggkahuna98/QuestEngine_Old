@@ -34,6 +34,9 @@ set (SOURCES
 	# CORE
 	src/Core/Application.cpp
 	src/Core/Logger.cpp
+
+	# Tracy
+	${QUEST_ROOT}/vendor/engine/tracy/public/TracyClient.cpp
 )
 
 set (HEADERS
@@ -61,6 +64,7 @@ set(VENDOR_INCLUDES
 	${QUEST_ROOT}/vendor/engine/glm/
 	${QUEST_ROOT}/vendor/engine/fmt/include/
 	${QUEST_ROOT}/vendor/engine/spdlog/include/
+	${QUEST_ROOT}/vendor/engine/tracy/public/
 	#vendor/stb/
 	#vendor/tinyobjloader/
 

@@ -6,6 +6,8 @@
 #include <filesystem>
 #include <vector>
 
+#include <tracy/Tracy.hpp>
+
 namespace Quest
 {
 	std::shared_ptr<spdlog::logger> Logger::s_CoreLogger;
@@ -55,6 +57,7 @@ namespace Quest
 
 	void TestLoggerMacros()
 	{
+		ZoneScoped;
 		// Core
 		QE_CORE_TRACE("{} {}", "Core:", "Trace");
 		QE_CORE_DEBUG("{} {}", "Core:", "Debug");
