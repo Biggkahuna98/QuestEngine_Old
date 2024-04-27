@@ -1,6 +1,10 @@
 set_property(TARGET PROPERTY USE_FOLDERS ON)
 
-file (GLOB_RECURSE SOURCES src/*.cpp src/*.h)
+file (GLOB_RECURSE SOURCES
+	src/*.hpp
+	src/*.h
+	src/*.cpp 
+)
 #file (GLOB_RECURSE HEADERS src/*.h)
 
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SOURCES})

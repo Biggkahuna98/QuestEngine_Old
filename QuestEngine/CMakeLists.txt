@@ -13,16 +13,6 @@ if (NOT Vulkan_FOUND)
 	return()
 endif()
 
-
-
-
-#add_subdirectory(QUEST_ROOT/Quest/vendor/glad)
-#message("Building imgui...")
-#add_subdirectory(${QUEST_ROOT}/Quest/vendor/imgui)
-#message("Done building imgui")
-#add_subdirectory(QUEST_ROOT/Quest/vendor/ImGuizmo)
-#add_subdirectory(QUEST_ROOT/Quest/vendor/yaml-cpp)
-
 set (QUEST_STATIC_LIBS
 	glfw
 	#VulkanRenderer
@@ -30,32 +20,30 @@ set (QUEST_STATIC_LIBS
 
 message("Building Quest Engine static library...")
 
-set (SOURCES
-	# CORE
-	src/Core/Application.cpp
-	src/Core/Logger.cpp
+file (GLOB_RECURSE SOURCES 
+	include/*.hpp
+	include/*.h
+	include/*.cpp
+	src/*.h 
+	src/*.hpp
+	src/*.cpp 
+)
+list (APPEND SOURCES ${QUEST_ROOT}/vendor/engine/tracy/public/TracyClient.cpp)
 
-	# Tracy
-	${QUEST_ROOT}/vendor/engine/tracy/public/TracyClient.cpp
+file (GLOB_RECURSE HEADERS
+	include/*.hpp
+	include/*.h
+	src/*.h
+	src/*.hpp
 )
 
-set (HEADERS
-	# LIBRARY INCLUDES
-	include/QuestEngine.h
-	include/QuestEngineEntrypoint.h
-	
-	# CORE
-	src/Core/Application.h
-	src/Core/Assert.h
-	src/Core/Logger.h
-
-	# UTLITY
-	src/Utility/PathBuilder.h
+file (GLOB_RECURSE VS_TREE 
+	src/*.cpp src/*.h 
+	include/QuestEngine.h 
+	include/QuestEngineEntrypoint.h 
+	assets/shaders/*.vert
+	assets/shaders/*.frag
 )
-
-file (GLOB_RECURSE VS_TREE src/*.cpp src/*.h include/QuestEngine.h include/QuestEngineEntrypoint.h assets/shaders/*.vert assets/shaders/*.frag)
-#list(REMOVE_ITEM SOURCES src/qepch.h src/qepch.cpp)
-#file (GLOB_RECURSE HEADERS include/Quest.h src/*.h)
 
 # vendor includes
 set(VENDOR_INCLUDES 
