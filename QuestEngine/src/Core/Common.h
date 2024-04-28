@@ -4,3 +4,4 @@
 #include "Logger.h"
 #include "Assert.h"
 #include "Profiler.h"
+#include "QuestTypes.h"
