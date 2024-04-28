@@ -1,9 +1,7 @@
 #include "Application.h"
+#include "Common.h"
 
-#include "Logger.h"
-#include "Assert.h"
 #include <iostream>
-#include <tracy/Tracy.hpp>
 
 namespace Quest
 {
