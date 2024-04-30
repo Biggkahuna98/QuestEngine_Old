@@ -1,4 +1,5 @@
-#pragma once
+#ifndef QUEST_CORE_LOGGER_H_INCLUDED
+#define QUEST_CORE_LOGGER_H_INCLUDED
 
 #include "spdlog/spdlog.h"
 
@@ -183,3 +184,5 @@ namespace Quest
 		logger->error("{0}: {1}", failurePrefix, formatted);
 	}
 }
+
+#endif // QUEST_CORE_LOGGER_H_INCLUDED

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef QUEST_ENGINE_ENTRYPOINT_INCLUDE
+#define QUEST_ENGINE_ENTRYPOINT_INCLUDE
 
 #include "Core/Application.h"
 #include "Core/Logger.h"
@@ -23,3 +24,5 @@ int main(int argc, char** argv)
 
 	return 0;
 }
+
+#endif // QUEST_ENGINE_ENTRYPOINT_INCLUDE

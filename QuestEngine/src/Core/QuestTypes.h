@@ -1,4 +1,6 @@
-#pragma once
+#ifndef QUEST_CORE_QUESTTYPES_H_INCLUDED
+#define QUEST_CORE_QUESTTYPES_H_INCLUDED
+
 #include <cstdint>
 
 namespace Quest
@@ -33,3 +35,5 @@ static_assert(sizeof(Quest::uint64) == 8, "uint64 should be 8 bytes");
 
 static_assert(sizeof(Quest::f32) == 4, "f32 should be 4 bytes");
 static_assert(sizeof(Quest::f64) == 8, "f64 should be 8 bytes");
+
+#endif // QUEST_CORE_QUESTTYPES_H_INCLUDED

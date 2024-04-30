@@ -1,4 +1,5 @@
-#pragma once // NOLINT
+#ifndef QUEST_CORE_ASSERT_H_INCLUDED
+#define QUEST_CORE_ASSERT_H_INCLUDED
 
 #include "Logger.h"
 
@@ -36,3 +37,5 @@
 	#define QE_CORE_VERIFY(condition, ...)
 	#define QE_VERIFY(condition, ...)
 #endif
+
+#endif // QUEST_CORE_ASSERT_H_INCLUDED

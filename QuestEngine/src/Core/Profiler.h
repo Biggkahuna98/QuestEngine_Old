@@ -1,4 +1,5 @@
-#pragma once
+#ifndef QUEST_CORE_PROFILER_H_INCLUDED
+#define QUEST_CORE_PROFILER_H_INCLUDED
 
 #define QE_ENABLE_PROFILING QUEST_DEBUG_MODE
 
@@ -21,3 +22,5 @@ QE_PROFILE_FUNC(name) or whatever you want to call it, goes at the top of a func
 #define QE_PROFILE_SCOPE
 
 #endif
+
+#endif // QUEST_CORE_PROFILER_H_INCLUDED

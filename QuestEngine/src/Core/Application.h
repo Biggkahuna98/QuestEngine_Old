@@ -1,4 +1,5 @@
-#pragma once // NOLINT
+#ifndef QUEST_CORE_APPLICATION_H_INCLUDED
+#define QUEST_CORE_APPLICATION_H_INCLUDED
 
 #include <memory>
 
@@ -18,3 +19,5 @@ namespace Quest
 }
 
 extern std::unique_ptr<Quest::Application> CreateApplication();
+
+#endif // QUEST_CORE_APPLICATION_H_INCLUDED
