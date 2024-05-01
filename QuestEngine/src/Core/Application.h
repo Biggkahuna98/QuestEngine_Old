@@ -1,7 +1,11 @@
 #ifndef QUEST_CORE_APPLICATION_H_INCLUDED
 #define QUEST_CORE_APPLICATION_H_INCLUDED
 
+#include "QuestCommon.h"
+
 #include <memory>
+
+#include "Window.h"
 
 namespace Quest
 {
@@ -14,7 +18,10 @@ namespace Quest
 		Application& operator=(const Application& other) = delete; // copy assignment
 		Application(Application&& other) noexcept = delete; // move constructor
 		Application& operator=(const Application&& other) noexcept = delete; // move assignment
+
+		void Run();
 	private:
+		ScopedPtr<Window> m_Window;
 	};
 }
 

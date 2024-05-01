@@ -16,8 +16,7 @@ int main(int argc, char** argv)
 
 	// Create the application from the user-defined CreateApplication() in the consuming program
 	std::unique_ptr<Quest::Application> app = CreateApplication();
-
-	// Initialize engine level systems
+	app->Run();
 
 	// Deinit static systems
 	Quest::Logger::Shutdown();
