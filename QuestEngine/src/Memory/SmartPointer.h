@@ -1,5 +1,5 @@
-#ifndef QUEST_SMART_POINTER_H_INCLUDE
-#define QUEST_SMART_POINTER_H_INCLUDE
+#ifndef QUEST_SMART_POINTER_H_INCLUDED
+#define QUEST_SMART_POINTER_H_INCLUDED
 
 #include <memory>
 
@@ -26,4 +26,4 @@ namespace Quest
 	using WeakRefPtr = std::weak_ptr<T>;
 }
 
-#endif // QUEST_SMART_POINTER_H_INCLUDE
+#endif // QUEST_SMART_POINTER_H_INCLUDED

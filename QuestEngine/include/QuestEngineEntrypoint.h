@@ -1,5 +1,5 @@
-#ifndef QUEST_ENGINE_ENTRYPOINT_INCLUDE
-#define QUEST_ENGINE_ENTRYPOINT_INCLUDE
+#ifndef QUEST_ENGINE_ENTRYPOINT_INCLUDED
+#define QUEST_ENGINE_ENTRYPOINT_INCLUDED
 
 #include "Core/Application.h"
 #include "Core/Logger.h"
@@ -25,4 +25,4 @@ int main(int argc, char** argv)
 	return 0;
 }
 
-#endif // QUEST_ENGINE_ENTRYPOINT_INCLUDE
+#endif // QUEST_ENGINE_ENTRYPOINT_INCLUDED
