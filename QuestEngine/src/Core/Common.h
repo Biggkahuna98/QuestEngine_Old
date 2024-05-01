@@ -6,5 +6,6 @@
 #include "Assert.h"
 #include "Profiler.h"
 #include "QuestTypes.h"
+#include "Memory/SmartPointer.h"
 
 #endif // QUEST_CORE_COMMON_H_INCLUDED
