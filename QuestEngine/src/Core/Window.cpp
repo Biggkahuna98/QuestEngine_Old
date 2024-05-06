@@ -113,7 +113,7 @@ namespace Quest
 
 	void Window::SwapBuffers()
 	{
-		glfwSwapBuffers(m_Window); // wont do anything for vulkan but whatever
+		//glfwSwapBuffers(m_Window); // wont do anything for vulkan but whatever
 	}
 
 	void Window::PauseWindow()
