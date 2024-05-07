@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "QuestCommon.h"
+#include "InputManager.h"
 
 #include <iostream>
 
@@ -24,10 +25,21 @@ namespace Quest
 
 	void Application::Run()
 	{
-		while (true)
+		InputManager im;
+		while (m_Running)
 		{
 			m_Window->ProcessEvents();
+
+			// Check input for closing
+			if (im.IsKeyPressed(Key::Escape))
+				m_Running = false;
+
 			m_Window->SwapBuffers();
 		}
+	}
+
+	Window& Application::GetWindow()
+	{
+		return *m_Window;
 	}
 }

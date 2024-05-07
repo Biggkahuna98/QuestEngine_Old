@@ -1,10 +1,10 @@
 #pragma once
 #include "Core/QuestCommon.h"
 
+#include "Core/Application.h"
 
 namespace Quest
 {
-	class Application;
 
 
 	// The context of the engine, manager of managers and everything else

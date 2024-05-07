@@ -16,7 +16,11 @@ namespace Quest
 		virtual ~Application() noexcept;
 
 		void Run();
+
+		Window& GetWindow();
 	private:
+		bool m_Running = true;
+
 		ScopedPtr<Window> m_Window;
 	};
 }

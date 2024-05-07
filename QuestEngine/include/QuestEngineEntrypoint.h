@@ -2,7 +2,6 @@
 #define QUEST_ENGINE_ENTRYPOINT_INCLUDED
 
 #include "Engine/QuestEngine.h"
-#include "Core/Application.h"
 #include "Core/Logger.h"
 
 
