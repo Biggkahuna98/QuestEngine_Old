@@ -1,5 +1,4 @@
 #include "QuestCommon.h"
-#include "InputManager.h"
 
 #include "Engine/Engine.h"
 

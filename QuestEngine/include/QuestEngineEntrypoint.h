@@ -17,8 +17,8 @@ int main(int argc, char** argv)
 	// Initialize the engine context singleton
 	Quest::Engine::Init();
 
-	// The application exists from the QuestEngine::Init() call, so run it
-	Quest::Engine::Get().GetApplication().Run();
+	// Run the main loop
+	Quest::Engine::Get().Run();
 
 	// Deinit static systems
 	Quest::Logger::Shutdown();

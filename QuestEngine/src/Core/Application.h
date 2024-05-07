@@ -15,13 +15,9 @@ namespace Quest
 		Application();
 		virtual ~Application() noexcept;
 
-		void Run();
-
-		Window& GetWindow();
+		virtual void Update();
 	private:
-		bool m_Running = true;
-
-		ScopedPtr<Window> m_Window;
+		
 	};
 }
 

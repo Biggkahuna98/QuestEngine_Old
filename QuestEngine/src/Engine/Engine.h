@@ -2,11 +2,11 @@
 #include "Core/QuestCommon.h"
 
 #include "Core/Application.h"
+#include "Core/Window.h"
 #include "Core/InputManager.h"
 
 namespace Quest
 {
-
 	// The context of the engine, manager of managers and everything else
 	// And yes, it is a global singleton.
 	class Engine
@@ -19,16 +19,23 @@ namespace Quest
 		static Engine& Get();
 		static Engine* GetPtr();
 
+		// This is the game loop
+		void Run();
+
 		Application& GetApplication();
 		Application* GetApplicationPtr();
+		Window& GetWindow();
+		Window* GetWindowPtr();
 		InputManager& GetInputManager();
 		InputManager* GetInputManagerPtr();
 	private:
 		Engine() {} // private to make singleton
 		static Engine* s_Instance;
+		bool m_Running = true;
 
 		// Baseline engine systems
 		ScopedPtr<Application> m_Application;
+		ScopedPtr<Window> m_Window;
 		ScopedPtr<InputManager> m_InputManager;
 	};
 }
