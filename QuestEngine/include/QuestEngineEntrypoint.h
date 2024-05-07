@@ -1,7 +1,7 @@
 #ifndef QUEST_ENGINE_ENTRYPOINT_INCLUDED
 #define QUEST_ENGINE_ENTRYPOINT_INCLUDED
 
-#include "Engine/QuestEngine.h"
+#include "Engine/Engine.h"
 #include "Core/Logger.h"
 
 
@@ -15,16 +15,16 @@ int main(int argc, char** argv)
 	Quest::Logger::Init(ci);
 
 	// Initialize the engine context singleton
-	Quest::QuestEngine::Init();
+	Quest::Engine::Init();
 
 	// The application exists from the QuestEngine::Init() call, so run it
-	Quest::QuestEngine::Get().GetApplication().Run();
+	Quest::Engine::Get().GetApplication().Run();
 
 	// Deinit static systems
 	Quest::Logger::Shutdown();
 
 	// Shutdown the engine
-	Quest::QuestEngine::Shutdown();
+	Quest::Engine::Shutdown();
 
 	return 0;
 }
