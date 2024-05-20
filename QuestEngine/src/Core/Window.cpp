@@ -1,7 +1,7 @@
 #include "QuestCommon.h"
 #include "Window.h"
 
-#include <GLFW/glfw3.h>
+#include "ThirdParty/GLFW.h"
 
 namespace Quest
 {
@@ -31,6 +31,8 @@ namespace Quest
 
 		glfwSetWindowUserPointer(m_Window, &m_WindowData);
 
+		#pragma clang diagnostic push
+		#pragma clang diagnostic ignored "-Wunused-parameter"
 		// Callbacks
 		glfwSetFramebufferSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
 			{
@@ -79,6 +81,7 @@ namespace Quest
 
 			}
 		);
+		#pragma clang diagnostic pop
 	}
 
 	Window::~Window()
@@ -91,12 +94,12 @@ namespace Quest
 		return m_WindowData.m_Title;
 	}
 
-	const uint32 Window::GetWidth()
+	uint32 Window::GetWidth()
 	{
 		return m_WindowData.m_Width;
 	}
 
-	const uint32 Window::GetHeight()
+	uint32 Window::GetHeight()
 	{
 		return m_WindowData.m_Height;
 	}

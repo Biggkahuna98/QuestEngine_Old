@@ -88,8 +88,11 @@ target_compile_definitions(${TARGET_NAME} PRIVATE
 	$<$<CONFIG:RELWITHDEBINFO>:QUEST_DEBUG_MODE=1>
 )
 
+target_compile_options(${TARGET_NAME} PRIVATE -W4 -Wno-c++98-compat -Wno-c++98-compat-pedantic)
+
 target_link_libraries(${TARGET_NAME} PRIVATE ${Vulkan_LIBRARIES} ${QUEST_STATIC_LIBS})
 
+#include_directories(SYSTEM )
 target_include_directories(${TARGET_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/ ${CMAKE_CURRENT_SOURCE_DIR}/include/ ${Vulkan_INCLUDE_DIR} ${VENDOR_INCLUDES})
 #target_include_directories(${TARGET_NAME} PUBLIC ${SOURCES} ${HEADERS} ${Vulkan_INCLUDE_DIR} ${VENDOR_INCLUDES})
 message("Done building Quest Engine")

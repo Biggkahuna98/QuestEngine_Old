@@ -3,7 +3,7 @@
 #include "Engine/Engine.h"
 
 // For getting the input state from the glfw window
-#include <GLFW/glfw3.h>
+#include "ThirdParty/GLFW.h"
 
 namespace Quest
 {

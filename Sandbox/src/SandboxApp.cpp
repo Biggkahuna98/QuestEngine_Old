@@ -16,6 +16,10 @@ SandboxApp::~SandboxApp()
 {
 }
 
+void SandboxApp::OnTick()
+{
+
+}
 
 std::unique_ptr<Quest::Application> CreateApplication() 
 { 

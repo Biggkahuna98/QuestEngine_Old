@@ -1,4 +1,4 @@
-#include <glm/glm.hpp>
+#include "ThirdParty/glm.h"
 
 namespace QMath
 {

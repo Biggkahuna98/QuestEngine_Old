@@ -4,7 +4,7 @@
 #define QE_ENABLE_PROFILING QUEST_DEBUG_MODE
 
 #if QE_ENABLE_PROFILING
-#include <tracy/Tracy.hpp>
+#include "ThirdParty/Tracy.h"
 
 /*
 QE_PROFILE_FRAME goes at the end of the frame loop

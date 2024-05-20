@@ -14,6 +14,8 @@ namespace Quest
 		s_Instance->m_Window = CreateScopedPtr<Window>(Window::CreateInfo());
 		// Initialize other managers
 		s_Instance->m_InputManager = CreateScopedPtr<InputManager>(s_Instance->m_Window->GetNativeWindow());
+		gCounterTest++;
+		QE_CORE_DEBUG_TAG("GLOBAL", "Counter: {}", Quest::gCounterTest);
 	}
 
 	void Engine::Shutdown()
@@ -36,8 +38,9 @@ namespace Quest
 	{
 		while (m_Running)
 		{
+			gCounterTest++;
 			m_Window->ProcessEvents();
-
+			QE_CORE_DEBUG_TAG("GLOBAL", "Counter: {}", Quest::gCounterTest);
 			// Check if we should close
 			if (m_InputManager->IsKeyPressed(Key::Escape))
 				m_Running = false;

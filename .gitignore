@@ -18,6 +18,7 @@ bin-int/
 # Directories
 build/
 .cache/
+docs/
 
 ###--- PREGENERATED IGNORES ---###
 

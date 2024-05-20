@@ -8,11 +8,14 @@
 
 // THE ENTRYPOINT FOR THE ENGINE
 // Initialize the engine systems and then create the user-defined application
+int Quest::gCounterTest = 0;
 int main(int argc, char** argv)
 {
+	Quest::gCounterTest = 1;
 	// Initialize logger system before anything else
 	Quest::Logger::CreateInfo ci;
 	Quest::Logger::Init(ci);
+	QE_CORE_DEBUG_TAG("GLOBAL", "Counter: {}", Quest::gCounterTest);
 
 	// Initialize the engine context singleton
 	Quest::Engine::Init();

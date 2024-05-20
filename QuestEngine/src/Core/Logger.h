@@ -1,7 +1,7 @@
 #ifndef QUEST_CORE_LOGGER_H_INCLUDED
 #define QUEST_CORE_LOGGER_H_INCLUDED
 
-#include "spdlog/spdlog.h"
+#include "ThirdParty/spdlog.h"
 
 #include <memory>
 #include <string>

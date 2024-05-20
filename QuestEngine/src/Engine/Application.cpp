@@ -1,5 +1,5 @@
 #include "Application.h"
-#include "QuestCommon.h"
+#include "Core/QuestCommon.h"
 #include "Engine/Engine.h"
 
 #include <iostream>
@@ -12,10 +12,6 @@ namespace Quest
 	}
 
 	Application::~Application() noexcept
-	{
-	}
-
-	void Application::Update()
 	{
 	}
 }

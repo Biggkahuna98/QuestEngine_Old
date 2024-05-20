@@ -1,12 +1,13 @@
 #pragma once
 #include "Core/QuestCommon.h"
 
-#include "Core/Application.h"
+#include "Engine/Application.h"
 #include "Core/Window.h"
 #include "Core/InputManager.h"
 
 namespace Quest
 {
+	extern int gCounterTest;
 	// The context of the engine, manager of managers and everything else
 	// And yes, it is a global singleton.
 	class Engine
