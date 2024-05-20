@@ -20,9 +20,9 @@ namespace Quest
 		Window(Window::CreateInfo ci);
 		~Window();
 
-		const std::string GetTitle();
-		uint32 GetWidth();
-		uint32 GetHeight();
+		const std::string GetTitle() const;
+		uint32 GetWidth() const;
+		uint32 GetHeight() const;
 		GLFWwindow* GetNativeWindow();
 
 		void ProcessEvents();

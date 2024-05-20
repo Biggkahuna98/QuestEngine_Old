@@ -13,7 +13,7 @@ project(QuestEngine CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_definitions(-DTRACY_ENABLE=1)
-add_compile_options(-Wno-c++98-compat -Wno-c++98-compat-pedantic)
+add_compile_options(-MP -Wno-c++98-compat -Wno-c++98-compat-pedantic)
 
 
 # Set QUEST_ROOT from environment var

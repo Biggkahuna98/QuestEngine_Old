@@ -89,17 +89,17 @@ namespace Quest
 		glfwTerminate();
 	}
 
-	const std::string Window::GetTitle()
+	const std::string Window::GetTitle() const
 	{
 		return m_WindowData.m_Title;
 	}
 
-	uint32 Window::GetWidth()
+	uint32 Window::GetWidth() const
 	{
 		return m_WindowData.m_Width;
 	}
 
-	uint32 Window::GetHeight()
+	uint32 Window::GetHeight() const
 	{
 		return m_WindowData.m_Height;
 	}
