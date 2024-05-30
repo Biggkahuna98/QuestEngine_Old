@@ -1,6 +1,5 @@
 #include "Engine.h"
 #include "ThirdParty/fmt.h"
-#include "Utility/QLog/ConsoleSink.h"
 
 Quest::Engine* Quest::Engine::s_Instance = nullptr;
 
@@ -18,8 +17,6 @@ namespace Quest
 		s_Instance->m_InputManager = CreateScopedPtr<InputManager>(s_Instance->m_Window->GetNativeWindow());
 		gCounterTest++;
 		QE_CORE_DEBUG_TAG("GLOBAL", "Counter: {}", Quest::gCounterTest);
-		QLog::ConsoleSink cs;
-		cs.Log({.format_str = "{}", .format_args = 5, QLog::Level::Trace});
 	}
 
 	void Engine::Shutdown()

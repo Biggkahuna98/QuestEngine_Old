@@ -43,9 +43,11 @@ namespace Quest
 
 		s_CoreLogger = std::make_shared<spdlog::logger>(ci.coreLoggerName, engineSinks.begin(), engineSinks.end());
 		s_CoreLogger->set_level(spdlog::level::trace);
+		s_CoreLogger->flush_on(spdlog::level::trace);
 
 		s_ClientLogger = std::make_shared<spdlog::logger>(ci.clientLoggerName, clientSinks.begin(), clientSinks.end());
 		s_ClientLogger->set_level(spdlog::level::trace);
+		s_ClientLogger->flush_on(spdlog::level::trace);
 	}
 
 	void Logger::Shutdown()
