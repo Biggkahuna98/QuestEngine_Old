@@ -7,7 +7,7 @@
 
 struct GLFWwindow;
 
-namespace Quest
+namespace QE
 {
 
 	class InputManager

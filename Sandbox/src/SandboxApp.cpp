@@ -7,7 +7,7 @@
 #include <iostream>
 #include <memory>
 
-SandboxApp::SandboxApp() : Quest::Application()
+SandboxApp::SandboxApp() : QE::Application()
 {
 	QE_TRACE_TAG("Sandbox", "App Constructor");
 }
@@ -21,7 +21,7 @@ void SandboxApp::OnTick()
 
 }
 
-std::unique_ptr<Quest::Application> CreateApplication() 
+std::unique_ptr<QE::Application> CreateApplication() 
 { 
 	return std::make_unique<SandboxApp>(); 
 }

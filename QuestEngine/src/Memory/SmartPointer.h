@@ -3,7 +3,7 @@
 
 #include <memory>
 
-namespace Quest
+namespace QE
 {
 	// Smart pointer wrappers
 	template <typename T>

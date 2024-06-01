@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-namespace Quest
+namespace QE
 {
 	Application::Application()
 	{

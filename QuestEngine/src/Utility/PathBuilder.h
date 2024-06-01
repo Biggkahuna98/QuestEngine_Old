@@ -5,7 +5,7 @@
 #include <string>
 #include <sstream>
 
-namespace Quest
+namespace QE
 {
 	static const std::string BuildPath(std::string relative_path)
 	{

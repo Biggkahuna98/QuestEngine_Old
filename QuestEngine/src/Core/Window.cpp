@@ -3,7 +3,7 @@
 
 #include "ThirdParty/GLFW.h"
 
-namespace Quest
+namespace QE
 {
 	// GLFW error function
 	static void GLFWerrorCallback(int error, const char* description)

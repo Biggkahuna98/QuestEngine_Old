@@ -1,9 +1,9 @@
 #include "Engine.h"
 #include "ThirdParty/fmt.h"
 
-Quest::Engine* Quest::Engine::s_Instance = nullptr;
+QE::Engine* QE::Engine::s_Instance = nullptr;
 
-namespace Quest
+namespace QE
 {
 	void Engine::Init()
 	{
@@ -16,7 +16,7 @@ namespace Quest
 		// Initialize other managers
 		s_Instance->m_InputManager = CreateScopedPtr<InputManager>(s_Instance->m_Window->GetNativeWindow());
 		gCounterTest++;
-		QE_CORE_DEBUG_TAG("GLOBAL", "Counter: {}", Quest::gCounterTest);
+		QE_CORE_DEBUG_TAG("GLOBAL", "Counter: {}", QE::gCounterTest);
 	}
 
 	void Engine::Shutdown()

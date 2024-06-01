@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace Quest
+namespace QE
 {
 	class Layer
 	{

@@ -1,5 +1,5 @@
-#ifndef QUEST_CORE_LOGGER_H_INCLUDED
-#define QUEST_CORE_LOGGER_H_INCLUDED
+#ifndef QE_CORE_LOGGER_H_INCLUDED
+#define QE_CORE_LOGGER_H_INCLUDED
 
 #include "ThirdParty/spdlog.h"
 
@@ -8,7 +8,7 @@
 #include <string_view>
 #include <format>
 
-namespace Quest
+namespace QE
 {
 	class Logger
 	{
@@ -61,38 +61,38 @@ namespace Quest
 
 //  PREFER TAGGED LOGS OVER NONTAGGED
 // Core logging
-#define QE_CORE_TRACE_TAG(tag, ...) ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Trace, tag, __VA_ARGS__)
-#define QE_CORE_DEBUG_TAG(tag, ...) ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Debug, tag, __VA_ARGS__)
-#define QE_CORE_INFO_TAG(tag, ...)  ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Info, tag, __VA_ARGS__)
-#define QE_CORE_WARN_TAG(tag, ...)  ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Warn, tag, __VA_ARGS__)
-#define QE_CORE_ERROR_TAG(tag, ...) ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Error, tag, __VA_ARGS__)
-#define QE_CORE_FATAL_TAG(tag, ...) ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Fatal, tag, __VA_ARGS__)
+#define QE_CORE_TRACE_TAG(tag, ...) ::QE::Logger::PrintMessageTag(::QE::Logger::Type::Core, ::QE::Logger::Level::Trace, tag, __VA_ARGS__)
+#define QE_CORE_DEBUG_TAG(tag, ...) ::QE::Logger::PrintMessageTag(::QE::Logger::Type::Core, ::QE::Logger::Level::Debug, tag, __VA_ARGS__)
+#define QE_CORE_INFO_TAG(tag, ...)  ::QE::Logger::PrintMessageTag(::QE::Logger::Type::Core, ::QE::Logger::Level::Info, tag, __VA_ARGS__)
+#define QE_CORE_WARN_TAG(tag, ...)  ::QE::Logger::PrintMessageTag(::QE::Logger::Type::Core, ::QE::Logger::Level::Warn, tag, __VA_ARGS__)
+#define QE_CORE_ERROR_TAG(tag, ...) ::QE::Logger::PrintMessageTag(::QE::Logger::Type::Core, ::QE::Logger::Level::Error, tag, __VA_ARGS__)
+#define QE_CORE_FATAL_TAG(tag, ...) ::QE::Logger::PrintMessageTag(::QE::Logger::Type::Core, ::QE::Logger::Level::Fatal, tag, __VA_ARGS__)
 
 // Client logging
-#define QE_TRACE_TAG(tag, ...) ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Trace, tag, __VA_ARGS__)
-#define QE_DEBUG_TAG(tag, ...) ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Debug, tag, __VA_ARGS__)
-#define QE_INFO_TAG(tag, ...)  ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Info, tag, __VA_ARGS__)
-#define QE_WARN_TAG(tag, ...)  ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Warn, tag, __VA_ARGS__)
-#define QE_ERROR_TAG(tag, ...) ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Error, tag, __VA_ARGS__)
-#define QE_FATAL_TAG(tag, ...) ::Quest::Logger::PrintMessageTag(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Fatal, tag, __VA_ARGS__)
+#define QE_TRACE_TAG(tag, ...) ::QE::Logger::PrintMessageTag(::QE::Logger::Type::Client, ::QE::Logger::Level::Trace, tag, __VA_ARGS__)
+#define QE_DEBUG_TAG(tag, ...) ::QE::Logger::PrintMessageTag(::QE::Logger::Type::Client, ::QE::Logger::Level::Debug, tag, __VA_ARGS__)
+#define QE_INFO_TAG(tag, ...)  ::QE::Logger::PrintMessageTag(::QE::Logger::Type::Client, ::QE::Logger::Level::Info, tag, __VA_ARGS__)
+#define QE_WARN_TAG(tag, ...)  ::QE::Logger::PrintMessageTag(::QE::Logger::Type::Client, ::QE::Logger::Level::Warn, tag, __VA_ARGS__)
+#define QE_ERROR_TAG(tag, ...) ::QE::Logger::PrintMessageTag(::QE::Logger::Type::Client, ::QE::Logger::Level::Error, tag, __VA_ARGS__)
+#define QE_FATAL_TAG(tag, ...) ::QE::Logger::PrintMessageTag(::QE::Logger::Type::Client, ::QE::Logger::Level::Fatal, tag, __VA_ARGS__)
 
 // Core Logging
-#define QE_CORE_TRACE(...)  ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Trace, __VA_ARGS__)
-#define QE_CORE_DEBUG(...)  ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Debug, __VA_ARGS__)
-#define QE_CORE_INFO(...)   ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Info, __VA_ARGS__)
-#define QE_CORE_WARN(...)   ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Warn, __VA_ARGS__)
-#define QE_CORE_ERROR(...)  ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Error, __VA_ARGS__)
-#define QE_CORE_FATAL(...)  ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Core, ::Quest::Logger::Level::Fatal, __VA_ARGS__)
+#define QE_CORE_TRACE(...)  ::QE::Logger::PrintMessage(::QE::Logger::Type::Core, ::QE::Logger::Level::Trace, __VA_ARGS__)
+#define QE_CORE_DEBUG(...)  ::QE::Logger::PrintMessage(::QE::Logger::Type::Core, ::QE::Logger::Level::Debug, __VA_ARGS__)
+#define QE_CORE_INFO(...)   ::QE::Logger::PrintMessage(::QE::Logger::Type::Core, ::QE::Logger::Level::Info, __VA_ARGS__)
+#define QE_CORE_WARN(...)   ::QE::Logger::PrintMessage(::QE::Logger::Type::Core, ::QE::Logger::Level::Warn, __VA_ARGS__)
+#define QE_CORE_ERROR(...)  ::QE::Logger::PrintMessage(::QE::Logger::Type::Core, ::QE::Logger::Level::Error, __VA_ARGS__)
+#define QE_CORE_FATAL(...)  ::QE::Logger::PrintMessage(::QE::Logger::Type::Core, ::QE::Logger::Level::Fatal, __VA_ARGS__)
 
 // Client logging
-#define QE_TRACE(...)  ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Trace, __VA_ARGS__)
-#define QE_DEBUG(...)  ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Debug, __VA_ARGS__)
-#define QE_INFO(...)   ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Info, __VA_ARGS__)
-#define QE_WARN(...)   ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Warn, __VA_ARGS__)
-#define QE_ERROR(...)  ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Error, __VA_ARGS__)
-#define QE_FATAL(...)  ::Quest::Logger::PrintMessage(::Quest::Logger::Type::Client, ::Quest::Logger::Level::Fatal, __VA_ARGS__)
+#define QE_TRACE(...)  ::QE::Logger::PrintMessage(::QE::Logger::Type::Client, ::QE::Logger::Level::Trace, __VA_ARGS__)
+#define QE_DEBUG(...)  ::QE::Logger::PrintMessage(::QE::Logger::Type::Client, ::QE::Logger::Level::Debug, __VA_ARGS__)
+#define QE_INFO(...)   ::QE::Logger::PrintMessage(::QE::Logger::Type::Client, ::QE::Logger::Level::Info, __VA_ARGS__)
+#define QE_WARN(...)   ::QE::Logger::PrintMessage(::QE::Logger::Type::Client, ::QE::Logger::Level::Warn, __VA_ARGS__)
+#define QE_ERROR(...)  ::QE::Logger::PrintMessage(::QE::Logger::Type::Client, ::QE::Logger::Level::Error, __VA_ARGS__)
+#define QE_FATAL(...)  ::QE::Logger::PrintMessage(::QE::Logger::Type::Client, ::QE::Logger::Level::Fatal, __VA_ARGS__)
 
-namespace Quest
+namespace QE
 {
 	template<typename... Args>
 	void Logger::PrintMessage(Logger::Type type, Logger::Level level, const std::format_string<Args...> format, Args&&... args)
@@ -185,4 +185,4 @@ namespace Quest
 	}
 }
 
-#endif // QUEST_CORE_LOGGER_H_INCLUDED
+#endif // QE_CORE_LOGGER_H_INCLUDED

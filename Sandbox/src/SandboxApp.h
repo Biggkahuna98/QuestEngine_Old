@@ -2,7 +2,7 @@
 
 #include <QuestEngine.h>
 
-class SandboxApp : public Quest::Application
+class SandboxApp : public QE::Application
 {
 public:
 	SandboxApp();

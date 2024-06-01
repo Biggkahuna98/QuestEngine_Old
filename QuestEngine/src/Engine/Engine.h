@@ -5,7 +5,7 @@
 #include "Core/Window.h"
 #include "Core/InputManager.h"
 
-namespace Quest
+namespace QE
 {
 	extern int gCounterTest;
 	// The context of the engine, manager of managers and everything else

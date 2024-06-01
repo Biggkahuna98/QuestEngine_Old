@@ -8,26 +8,26 @@
 
 // THE ENTRYPOINT FOR THE ENGINE
 // Initialize the engine systems and then create the user-defined application
-int Quest::gCounterTest = 0;
+int QE::gCounterTest = 0;
 int main(int argc, char** argv)
 {
-	Quest::gCounterTest = 1;
+	QE::gCounterTest = 1;
 	// Initialize logger system before anything else
-	Quest::Logger::CreateInfo ci;
-	Quest::Logger::Init(ci);
-	QE_CORE_DEBUG_TAG("GLOBAL", "Counter: {}", Quest::gCounterTest);
+	QE::Logger::CreateInfo ci;
+	QE::Logger::Init(ci);
+	QE_CORE_DEBUG_TAG("GLOBAL", "Counter: {}", QE::gCounterTest);
 
 	// Initialize the engine context singleton
-	Quest::Engine::Init();
+	QE::Engine::Init();
 
 	// Run the main loop
-	Quest::Engine::Get().Run();
+	QE::Engine::Get().Run();
 
 	// Deinit static systems
-	Quest::Logger::Shutdown();
+	QE::Logger::Shutdown();
 
 	// Shutdown the engine
-	Quest::Engine::Shutdown();
+	QE::Engine::Shutdown();
 
 	return 0;
 }

@@ -5,7 +5,7 @@
 
 #include <memory>
 
-namespace Quest
+namespace QE
 {
 	/*
 	* This is the main class that clients will subclass
@@ -26,6 +26,6 @@ namespace Quest
 	};
 }
 
-extern std::unique_ptr<Quest::Application> CreateApplication();
+extern std::unique_ptr<QE::Application> CreateApplication();
 
 #endif // QUEST_CORE_APPLICATION_H_INCLUDED

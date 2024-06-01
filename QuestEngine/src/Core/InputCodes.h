@@ -2,7 +2,7 @@
 
 #include "QuestTypes.h"
 
-namespace Quest
+namespace QE
 {
 	using KeyCode = uint16;
 

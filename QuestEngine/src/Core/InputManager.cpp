@@ -5,7 +5,7 @@
 // For getting the input state from the glfw window
 #include "ThirdParty/GLFW.h"
 
-namespace Quest
+namespace QE
 {
 	InputManager::InputManager(GLFWwindow* window) :
 		m_Window(window)
