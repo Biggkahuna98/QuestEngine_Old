@@ -71,6 +71,7 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}  FILES ${VS_TREE})
 
 add_library(${TARGET_NAME} ${QUEST_LIBRARY_TYPE} ${SOURCES} ${HEADERS})
 set_target_properties(${TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
+add_compile_options(-Wno-pragma-once-outside-header)
 #target_precompile_headers(${TARGET_NAME} 
 #    PRIVATE 
 #    "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/src/qepch.h>"
