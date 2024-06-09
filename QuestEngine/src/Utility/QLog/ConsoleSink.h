@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ISink.h"
-#include "ThirdParty/fmt.h"
 
 namespace QLog
 {
@@ -14,7 +13,7 @@ namespace QLog
 
 		void Log(const LogPayload payload);
 	private:
-		void __Trace(fmt::string_view format, fmt::format_args args);
+		//void __Trace(fmt::string_view format, fmt::format_args args);
 		void Trace(const std::string msg);
 		//void Debug(const std::string msg) override;
 		//void Info(const std::string msg) override;

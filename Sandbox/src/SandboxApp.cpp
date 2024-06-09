@@ -1,8 +1,8 @@
 // NOLINTBEGIN
 #include "SandboxApp.h"
 
-#include <QuestEngine.h>
-#include <QuestEngineEntrypoint.h>
+#include <QuestEngine/QuestEngine.h>
+#include <QuestEngine/QuestEngineEntrypoint.h>
 
 #include <iostream>
 #include <memory>

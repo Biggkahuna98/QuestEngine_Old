@@ -24,7 +24,7 @@ message("Building glfw...")
 option(GLFW_BUILD_DOCS OFF)
 option(GLFW_BUILD_EXAMPLES OFF)
 option(GLFW_BUILD_TESTS OFF)
-add_subdirectory(${QUEST_ROOT}/vendor/engine/glfw)
+add_subdirectory(${QUEST_ROOT}/ThirdParty/Engine/glfw)
 message("Done building glfw")
 
 # Engine directory

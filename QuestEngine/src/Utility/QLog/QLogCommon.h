@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "ThirdParty/fmt.h"
+#include <format>
 
 namespace QLog
 {
@@ -11,8 +11,8 @@ namespace QLog
 
 	struct LogPayload
 	{
-		fmt::string_view format_str;
-		fmt::format_args format_args;
+		std::string_view format_str;
+		std::format_args format_args;
 		Level log_level;
 	};
 }

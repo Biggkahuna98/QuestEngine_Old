@@ -1,5 +1,4 @@
-#ifndef QUEST_ENGINE_ENTRYPOINT_INCLUDED
-#define QUEST_ENGINE_ENTRYPOINT_INCLUDED
+#pragma once
 
 #include "Engine/Engine.h"
 #include "Core/Logger.h"
@@ -31,5 +30,3 @@ int main(int argc, char** argv)
 
 	return 0;
 }
-
-#endif // QUEST_ENGINE_ENTRYPOINT_INCLUDED

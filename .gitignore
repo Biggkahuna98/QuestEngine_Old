@@ -19,6 +19,7 @@ bin-int/
 build/
 .cache/
 docs/
+ThirdParty/
 
 ###--- PREGENERATED IGNORES ---###
 

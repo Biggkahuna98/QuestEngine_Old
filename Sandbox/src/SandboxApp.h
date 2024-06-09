@@ -1,6 +1,6 @@
 #pragma once
 
-#include <QuestEngine.h>
+#include <QuestEngine/QuestEngine.h>
 
 class SandboxApp : public QE::Application
 {

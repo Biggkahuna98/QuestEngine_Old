@@ -1,5 +1,4 @@
 #include "ConsoleSink.h"
-#include "ThirdParty/fmt.h"
 
 namespace QLog
 {
@@ -17,7 +16,7 @@ namespace QLog
 		switch (payload.log_level)
 		{
 		case Level::Off: break;
-		case Level::Trace: __Trace(payload.format_str, payload.format_args); break;
+		//case Level::Trace: __Trace(payload.format_str, payload.format_args); break;
 		//case Level::Debug: Debug(msg); break;
 		//case Level::Info: Info(msg); break;
 		//case Level::Warn: Warn(msg); break;
@@ -26,10 +25,10 @@ namespace QLog
 		}
 	}
 
-	void ConsoleSink::__Trace(fmt::string_view format, fmt::format_args args)
-	{
-		fmt::vprint(format, args);
-	}
+	//void ConsoleSink::__Trace(fmt::string_view format, fmt::format_args args)
+	//{
+	//	fmt::vprint(format, args);
+	//}
 	void ConsoleSink::Trace(const std::string msg)
 	{
 		

@@ -28,7 +28,7 @@ file (GLOB_RECURSE SOURCES
 	src/*.hpp
 	src/*.cpp 
 )
-list (APPEND SOURCES ${QUEST_ROOT}/vendor/engine/tracy/public/TracyClient.cpp)
+list (APPEND SOURCES ${QUEST_ROOT}/ThirdParty/Engine/tracy/public/TracyClient.cpp)
 
 file (GLOB_RECURSE HEADERS
 	include/*.hpp
@@ -39,20 +39,20 @@ file (GLOB_RECURSE HEADERS
 
 file (GLOB_RECURSE VS_TREE 
 	src/*.cpp src/*.h 
-	include/QuestEngine.h 
-	include/QuestEngineEntrypoint.h 
+	include/QuestEngine/QuestEngine.h 
+	include/QuestEngine/QuestEngineEntrypoint.h 
 	assets/shaders/*.vert
 	assets/shaders/*.frag
 )
 
 # vendor includes
 set(VENDOR_INCLUDES 
-	${QUEST_ROOT}/vendor/engine/glfw/include/
+	${QUEST_ROOT}/ThirdParty/Engine/glfw/include/
 	#vendor/imgui/
-	${QUEST_ROOT}/vendor/engine/glm/
-	${QUEST_ROOT}/vendor/engine/fmt/include/
-	${QUEST_ROOT}/vendor/engine/spdlog/include/
-	${QUEST_ROOT}/vendor/engine/tracy/public/
+	${QUEST_ROOT}/ThirdParty/Engine/glm/
+	${QUEST_ROOT}/ThirdParty/Engine/fmt/include/
+	${QUEST_ROOT}/ThirdParty/Engine/spdlog/include/
+	${QUEST_ROOT}/ThirdParty/Engine/tracy/public/
 	#vendor/stb/
 	#vendor/tinyobjloader/
 
