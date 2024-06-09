@@ -22,11 +22,13 @@ namespace QE
 		using namespace QLog;
 		std::vector<QLog::SinkCreateInfo> sinks = {
 			{SinkType::ConsoleSink, "Ignoreme.txt", true},
-			{SinkType::FileSink, "QLogTest.txt", true}
+			{SinkType::FileSink, "logs/QLogTest.log", false}
 		};
 		QLog::Logger myLogger("TEST LOGGER", sinks);
 		myLogger.Log("Hello logger");
 		myLogger.Log("Testing123");
+		myLogger.Log("Hey {}", "Joe");
+		myLogger.Log("Yo {}, how are you {}", "Bob", "hanging?");
 		
 	}
 

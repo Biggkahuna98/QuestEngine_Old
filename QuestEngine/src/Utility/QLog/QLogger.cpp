@@ -21,9 +21,22 @@ namespace QLog
 			delete sink;
 	}
 
+	Level Logger::GetLogLevel()
+	{
+		return m_LogLevel;
+	}
+
+	void Logger::SetLogLevel(Level lvl)
+	{
+		m_LogLevel = lvl;
+	}
+
 	void Logger::Log(const std::string_view msg)
 	{
 		for (auto sink : m_Sinks)
-			sink->Log(msg);
+		{
+			if (sink->ShouldMessageBeLogged(m_LogLevel))
+				sink->Log(msg);
+		}
 	}
 }
