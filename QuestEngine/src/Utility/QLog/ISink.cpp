@@ -21,14 +21,17 @@ namespace QLog
 			return nullptr;
 		}
 
+		#pragma clang diagnostic push
+		#pragma clang diagnostic ignored "-Wunused-parameter"
 		ISink* CreateConsoleSink(const SinkCreateInfo& ci)
 		{
 			return new ConsoleSink();
 		}
+		#pragma clang diagnostic pop
 
 		ISink* CreateFileSink(const SinkCreateInfo& ci)
 		{
-			return nullptr;
+			return new FileSink(ci.Filename, ci.Truncate);
 		}
 	}
 }

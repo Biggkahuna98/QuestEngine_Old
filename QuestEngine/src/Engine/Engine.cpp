@@ -21,7 +21,8 @@ namespace QE
 
 		using namespace QLog;
 		std::vector<QLog::SinkCreateInfo> sinks = {
-			{SinkType::ConsoleSink, "Fart.txt", true},
+			{SinkType::ConsoleSink, "Ignoreme.txt", true},
+			{SinkType::FileSink, "QLogTest.txt", true}
 		};
 		QLog::Logger myLogger("TEST LOGGER", sinks);
 		myLogger.Log("Hello logger");
