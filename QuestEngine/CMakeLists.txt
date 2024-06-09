@@ -84,8 +84,8 @@ target_compile_definitions(${TARGET_NAME} PRIVATE
 	QE_PLATFORM_WINDOWS=1
 )
 target_compile_definitions(${TARGET_NAME} PRIVATE 
-	$<$<CONFIG:DEBUG>:QUEST_DEBUG_MODE=1> 
-	$<$<CONFIG:RELWITHDEBINFO>:QUEST_DEBUG_MODE=1>
+	$<$<CONFIG:DEBUG>:QE_DEBUG_MODE=1> 
+	$<$<CONFIG:RELWITHDEBINFO>:QE_DEBUG_MODE=1>
 )
 
 target_compile_options(${TARGET_NAME} PRIVATE -W4 -Wno-c++98-compat -Wno-c++98-compat-pedantic)
