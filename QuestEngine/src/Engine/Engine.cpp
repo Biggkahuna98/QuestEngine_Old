@@ -1,5 +1,4 @@
 #include "Engine.h"
-#include "ThirdParty/fmt.h"
 
 QE::Engine* QE::Engine::s_Instance = nullptr;
 
