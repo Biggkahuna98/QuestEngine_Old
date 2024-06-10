@@ -2,6 +2,8 @@
 //#include "Utility/QLog/ConsoleSink.h"
 #include "Utility/QLog/QLogger.h"
 
+#include "Core/LogManager.h"
+
 QE::Engine* QE::Engine::s_Instance = nullptr;
 
 namespace QE
@@ -18,19 +20,6 @@ namespace QE
 		s_Instance->m_InputManager = CreateScopedPtr<InputManager>(s_Instance->m_Window->GetNativeWindow());
 		gCounterTest++;
 		QE_CORE_DEBUG_TAG("GLOBAL", "Counter: {}", QE::gCounterTest);
-
-		using namespace QLog;
-		std::vector<QLog::SinkCreateInfo> sinks = {
-			{SinkType::ColoredConsoleSink, "Ignoreme.txt", true},
-			{SinkType::FileSink, "logs/QLogTest.log", false}
-		};
-		QLog::Logger myLogger("TEST LOGGER", sinks);
-		myLogger.Trace("Trace test");
-		myLogger.Debug("Debug test");
-		myLogger.Info("Info test");
-		myLogger.Warn("Warn test");
-		myLogger.Error("Error test");
-		myLogger.Fatal("Fatal test");
 	}
 
 	void Engine::Shutdown()
