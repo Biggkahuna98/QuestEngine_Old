@@ -9,10 +9,24 @@ namespace QLog
 		Off = 0, Trace, Debug, Info, Warn, Error, Fatal
 	};
 
-	struct LogPayload
+	constexpr std::string LevelToString(Level lvl)
 	{
-		std::string_view format_str;
-		std::format_args format_args;
-		Level log_level;
+		switch (lvl)
+		{
+		case Level::Trace: return "Trace";
+		case Level::Debug: return "Debug";
+		case Level::Info: return "Info";
+		case Level::Warn: return "Warn";
+		case Level::Error: return "Error";
+		case Level::Fatal: return "Fatal";
+		default:
+			return "Off";
+		}
+	}
+
+	struct SinkLogPayload
+	{
+		const Level level;
+		const std::string_view msg;
 	};
 }

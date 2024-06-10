@@ -8,6 +8,7 @@ namespace QLog
 	enum class SinkType : uint8_t
 	{
 		ConsoleSink = 0,
+		ColoredConsoleSink,
 		FileSink,
 	};
 
@@ -23,7 +24,7 @@ namespace QLog
 	public:
 		virtual ~ISink() = default;
 		
-		virtual void Log(const std::string_view msg) = 0;
+		virtual void Log(SinkLogPayload payload) = 0;
 
 		void SetLevel(Level newLevel) { m_LogLevel = newLevel; }
 		Level GetLevel() const { return m_LogLevel; }

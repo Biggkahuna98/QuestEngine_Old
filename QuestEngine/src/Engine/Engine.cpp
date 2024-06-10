@@ -21,15 +21,16 @@ namespace QE
 
 		using namespace QLog;
 		std::vector<QLog::SinkCreateInfo> sinks = {
-			{SinkType::ConsoleSink, "Ignoreme.txt", true},
+			{SinkType::ColoredConsoleSink, "Ignoreme.txt", true},
 			{SinkType::FileSink, "logs/QLogTest.log", false}
 		};
 		QLog::Logger myLogger("TEST LOGGER", sinks);
-		myLogger.Log("Hello logger");
-		myLogger.Log("Testing123");
-		myLogger.Log("Hey {}", "Joe");
-		myLogger.Log("Yo {}, how are you {}", "Bob", "hanging?");
-		
+		myLogger.Trace("Trace test");
+		myLogger.Debug("Debug test");
+		myLogger.Info("Info test");
+		myLogger.Warn("Warn test");
+		myLogger.Error("Error test");
+		myLogger.Fatal("Fatal test");
 	}
 
 	void Engine::Shutdown()
@@ -53,6 +54,7 @@ namespace QE
 		while (m_Running)
 		{
 			gCounterTest++;
+
 			m_Window->ProcessEvents();
 			//QE_CORE_DEBUG_TAG("GLOBAL", "Counter: {}", Quest::gCounterTest);
 			// Check if we should close

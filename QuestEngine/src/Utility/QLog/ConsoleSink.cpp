@@ -12,8 +12,8 @@ namespace QLog
 	{
 	}
 
-	void ConsoleSink::Log(const std::string_view msg)
+	void ConsoleSink::Log(SinkLogPayload payload)
 	{
-		std::cout << msg << "\n";
+		std::cout << payload.msg << "\n";
 	}
 }

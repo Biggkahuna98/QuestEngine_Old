@@ -18,11 +18,12 @@ namespace QLog
 
 	FileSink::~FileSink()
 	{
+		m_File.close();
 	}
 
-	void FileSink::Log(const std::string_view msg)
+	void FileSink::Log(SinkLogPayload payload)
 	{
-		m_File << msg << "\n";
+		m_File << payload.msg << "\n";
 	}
 
 	void FileSink::Flush()

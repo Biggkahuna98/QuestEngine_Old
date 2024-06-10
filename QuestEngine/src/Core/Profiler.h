@@ -1,7 +1,6 @@
-#ifndef QUEST_CORE_PROFILER_H_INCLUDED
-#define QUEST_CORE_PROFILER_H_INCLUDED
+#pragma once
 
-#define QE_ENABLE_PROFILING QUEST_DEBUG_MODE
+#define QE_ENABLE_PROFILING QE_DEBUG_MODE
 
 #if QE_ENABLE_PROFILING
 #include "ThirdParty/Tracy.h"
@@ -22,5 +21,3 @@ QE_PROFILE_FUNC(name) or whatever you want to call it, goes at the top of a func
 #define QE_PROFILE_SCOPE
 
 #endif
-
-#endif // QUEST_CORE_PROFILER_H_INCLUDED

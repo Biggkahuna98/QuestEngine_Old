@@ -4,12 +4,12 @@
 
 namespace QLog
 {
-	
-	class ConsoleSink : public ISink
+
+	class ColoredConsoleSink : public ISink
 	{
 	public:
-		ConsoleSink();
-		~ConsoleSink();
+		ColoredConsoleSink();
+		~ColoredConsoleSink();
 
 		void Log(SinkLogPayload payload);
 	};

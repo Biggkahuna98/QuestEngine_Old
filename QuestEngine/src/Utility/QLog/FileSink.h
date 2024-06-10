@@ -14,7 +14,7 @@ namespace QLog
 		FileSink(const std::string_view fileName, const bool truncate);
 		~FileSink();
 
-		void Log(const std::string_view msg);
+		void Log(SinkLogPayload payload);
 
 		void Flush();
 	private:
