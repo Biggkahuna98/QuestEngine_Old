@@ -9,7 +9,7 @@
 
 SandboxApp::SandboxApp() : QE::Application()
 {
-	QE_TRACE_TAG("Sandbox", "App Constructor");
+	QE_INFO_TAG("Sandbox", "App Constructor");
 }
 
 SandboxApp::~SandboxApp()

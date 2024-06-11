@@ -1,7 +1,7 @@
 #ifndef QE_CORE_ASSERT_H_INCLUDED
 #define QE_CORE_ASSERT_H_INCLUDED
 
-#include "Logger.h"
+#include "LogManager.h"
 
 #ifdef QE_PLATFORM_WINDOWS
 	#define QE_DEBUG_BREAK __debugbreak()
@@ -17,8 +17,8 @@
 #define QE_ENABLE_VERIFY
 
 #ifdef QE_ENABLE_ASSERTS
-	#define QE_CORE_ASSERT_MSG_INTERNAL(...) ::QE::Logger::PrintAssertMessage(::QE::Logger::Type::Core, "Assertion Failed", ##__VA_ARGS__)
-	#define QE_ASSERT_MSG_INTERNAL(...) ::QE::Logger::PrintAssertMessage(::QE::Logger::Type::Client, "Assertion Failed", ##__VA_ARGS__)
+	#define QE_CORE_ASSERT_MSG_INTERNAL(...) ::QE::LogManager::Get().PrintAssertMessage("QUEST", "Assertion Failed", ##__VA_ARGS__)
+	#define QE_ASSERT_MSG_INTERNAL(...) ::QE::LogManager::Get().PrintAssertMessage("GAME", "Assertion Failed", ##__VA_ARGS__)
 
 	#define QE_CORE_ASSERT(condition, ...) { if (!(condition)) { QE_CORE_ASSERT_MSG_INTERNAL(__VA_ARGS__); QE_DEBUG_BREAK; } }
 	#define QE_ASSERT(condition, ...) { if (!(condition)) { QE_ASSERT_MSG_INTERNAL(__VA_ARGS__); QE_DEBUG_BREAK; } }
@@ -28,8 +28,8 @@
 #endif
 
 #ifdef QE_ENABLE_VERIFY
-	#define QE_CORE_VERIFY_MSG_INTERNAL(...) ::QE::Logger::PrintAssertMessage(::QE::Logger::Type::Core, "Verify Failed", ##__VA_ARGS__)
-	#define QE_VERIFY_MSG_INTERNAL(...) ::QE::Logger::PrintAssertMessage(::QE::Logger::Type::Client, "Verify Failed", ##__VA_ARGS__)
+	#define QE_CORE_VERIFY_MSG_INTERNAL(...) ::QE::LogManager::Get().PrintAssertMessage("QUEST", "Verify Failed", ##__VA_ARGS__)
+	#define QE_VERIFY_MSG_INTERNAL(...) ::QE::LogManager::Get().PrintAssertMessage("GAME", "Verify Failed", ##__VA_ARGS__)
 
 	#define QE_CORE_VERIFY(condition, ...) { if (!(condition)) { QE_CORE_VERIFY_MSG_INTERNAL(__VA_ARGS__); QE_DEBUG_BREAK; } }
 	#define QE_VERIFY(condition, ...) { if (!(condition)) { QE_VERIFY_MSG_INTERNAL(__VA_ARGS__); QE_DEBUG_BREAK; } }

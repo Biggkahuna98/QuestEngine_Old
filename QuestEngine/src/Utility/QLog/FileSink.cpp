@@ -1,16 +1,27 @@
 #include "FileSink.h"
 
+#include <filesystem>
+
 namespace QLog
 {
-	FileSink::FileSink(const std::string_view fileName, const bool truncate)
-		: m_Filename(fileName)
+	void CreateLogsDirectory()
 	{
-		if (truncate)
-			m_File = std::ofstream(fileName.data(), std::ios::out, std::ios::trunc);
-		else
-			m_File = std::ofstream(fileName.data(), std::ios::out);
+		if (!std::filesystem::exists("logs"))
+			std::filesystem::create_directory("logs");
+	}
 
-		if (!m_File)
+	FileSink::FileSink(const std::string_view fileName, const bool truncate)
+	{
+		CreateLogsDirectory();
+
+		m_Filename = fileName;
+		//m_File.open(m_Filename);
+		if (truncate)
+			m_File.open(m_Filename, std::ofstream::trunc);
+		else
+			m_File.open(m_Filename, std::ofstream::app);
+
+		if (!m_File.is_open())
 		{
 			std::throw_with_nested(std::runtime_error("File could not be opened"));
 		}
@@ -24,6 +35,7 @@ namespace QLog
 	void FileSink::Log(SinkLogPayload payload)
 	{
 		m_File << payload.msg << "\n";
+		Flush();
 	}
 
 	void FileSink::Flush()
