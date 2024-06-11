@@ -37,12 +37,14 @@ namespace QE
 		QLog::Logger& GetLogger(std::string name);
 		QLog::Logger* GetLoggerPtr(std::string name);
 
+		friend inline QLog::Logger* GetOrCreateLogger(const std::string_view loggerName);
+
 		template<typename... Args>
-		constexpr void PrintMessage(std::string_view loggerName, LogManager::Level level, std::format_string<Args...> format, Args&&... args);
+		constexpr void PrintMessage(const std::string_view loggerName, const LogManager::Level level, std::format_string<Args...> format, Args&&... args);
 		template<typename... Args>
-		constexpr void PrintMessageTag(std::string_view loggerName, LogManager::Level level, std::string_view tag, std::format_string<Args...> format, Args&&... args);
+		constexpr void PrintMessageTag(const std::string_view loggerName, const LogManager::Level level, std::string_view tag, std::format_string<Args...> format, Args&&... args);
 		template<typename... Args>
-		constexpr void PrintAssertMessage(std::string_view loggerName, std::string_view failurePrefix, std::format_string<Args...> format, Args&&... args);
+		constexpr void PrintAssertMessage(const std::string_view loggerName, const std::string_view failurePrefix, std::format_string<Args...> format, Args&&... args);
 	private:
 		LogManager() {};
 		static LogManager* s_Instance;
@@ -95,13 +97,13 @@ namespace QE
 
 namespace QE
 {
-	template<typename ...Args>
-	inline constexpr void LogManager::PrintMessage(std::string_view loggerName, LogManager::Level level, std::format_string<Args...> format, Args&&... args)
+
+	inline QLog::Logger* GetOrCreateLogger(const std::string_view loggerName)
 	{
 		QLog::Logger* logger = nullptr;
 		try
 		{
-			logger = m_Loggers.at(loggerName.data());
+			logger = LogManager::Get().m_Loggers.at(loggerName.data());
 		}
 		catch (std::out_of_range e)
 		{
@@ -117,10 +119,17 @@ namespace QE
 			}
 			};
 			LogManager::Get().RegisterLogger(newLoggerCI);
-			
-			logger = m_Loggers.at(loggerName.data());
+
+			logger = LogManager::Get().m_Loggers.at(loggerName.data());
 		}
 
+		return logger;
+	}
+
+	template<typename ...Args>
+	inline constexpr void LogManager::PrintMessage(const std::string_view loggerName, const LogManager::Level level, std::format_string<Args...> format, Args&&... args)
+	{
+		QLog::Logger* logger = GetOrCreateLogger(loggerName);
 		const std::string formatted = std::format(format, std::forward<Args>(args)...);
 		switch (level)
 		{
@@ -146,31 +155,9 @@ namespace QE
 	}
 
 	template<typename ...Args>
-	inline constexpr void LogManager::PrintMessageTag(std::string_view loggerName, LogManager::Level level, std::string_view tag, std::format_string<Args...> format, Args&&... args)
+	inline constexpr void LogManager::PrintMessageTag(const std::string_view loggerName, const LogManager::Level level, std::string_view tag, std::format_string<Args...> format, Args&&... args)
 	{
-		QLog::Logger* logger = nullptr;
-		try
-		{
-			logger = m_Loggers.at(loggerName.data());
-		}
-		catch (std::out_of_range e)
-		{
-			// Kind of gross, but create the logger if it doesn't exist, then use it
-			std::string logFileName = "";
-			logFileName.append("logs/").append(loggerName.data()).append(".log");
-			LogManager::LoggerCreateInfo newLoggerCI = {
-			.loggerName = loggerName.data(),
-			.logLevel = LogManager::Level::Trace,
-			.sinks = {
-				{QLog::SinkType::ColoredConsoleSink, "", true},
-				{QLog::SinkType::FileSink, logFileName, false}
-			}
-			};
-			LogManager::Get().RegisterLogger(newLoggerCI);
-
-			logger = m_Loggers.at(loggerName.data());
-		}
-
+		QLog::Logger* logger = GetOrCreateLogger(loggerName);
 		const std::string formatted = std::format(format, std::forward<Args>(args)...);
 		switch (level)
 		{
@@ -196,31 +183,9 @@ namespace QE
 	}
 
 	template<typename... Args>
-	inline constexpr void LogManager::PrintAssertMessage(std::string_view loggerName, std::string_view failurePrefix, std::format_string<Args...> format, Args&&... args)
+	inline constexpr void LogManager::PrintAssertMessage(const std::string_view loggerName, const std::string_view failurePrefix, std::format_string<Args...> format, Args&&... args)
 	{
-		QLog::Logger* logger = nullptr;
-		try
-		{
-			logger = m_Loggers.at(loggerName.data());
-		}
-		catch (std::out_of_range e)
-		{
-			// Kind of gross, but create the logger if it doesn't exist, then use it
-			std::string logFileName = "";
-			logFileName.append("logs/").append(loggerName.data()).append(".log");
-			LogManager::LoggerCreateInfo newLoggerCI = {
-			.loggerName = loggerName.data(),
-			.logLevel = LogManager::Level::Trace,
-			.sinks = {
-				{QLog::SinkType::ColoredConsoleSink, "", true},
-				{QLog::SinkType::FileSink, logFileName, false}
-			}
-			};
-			LogManager::Get().RegisterLogger(newLoggerCI);
-
-			logger = m_Loggers.at(loggerName.data());
-		}
-
+		QLog::Logger* logger = GetOrCreateLogger(loggerName);
 		const std::string formatted = std::format(format, std::forward<Args>(args)...);
 		logger->Error("{0}: {1}", failurePrefix, formatted);
 	}

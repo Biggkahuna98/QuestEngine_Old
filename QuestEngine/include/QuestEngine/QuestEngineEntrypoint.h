@@ -47,8 +47,6 @@ int main(int argc, char** argv)
 	// Initialize the engine context singleton
 	QE::Engine::Init();
 
-	QE_CORE_TRACE_TAG("GLOBAL", "Testing123");
-
 	// Run the main loop
 	QE::Engine::Get().Run();
 
