@@ -1,8 +1,7 @@
 #include "Engine.h"
-//#include "Utility/QLog/ConsoleSink.h"
-#include "Utility/QLog/QLogger.h"
 
 #include "Core/LogManager.h"
+#include "Core/Profiler.h"
 
 QE::Engine* QE::Engine::s_Instance = nullptr;
 
@@ -49,8 +48,11 @@ namespace QE
 			// Check if we should close
 			if (m_InputManager->IsKeyPressed(Key::Escape))
 				m_Running = false;
+			if (m_InputManager->IsKeyPressed(Key::A))
+				QE_CORE_DEBUG_TAG("INPUT", "{}", "A was pressed");
 
 			m_Window->SwapBuffers();
+			//QE_PROFILE_FRAME;
 		}
 	}
 

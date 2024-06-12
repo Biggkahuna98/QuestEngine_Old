@@ -1,5 +1,4 @@
-#ifndef QE_CORE_ASSERT_H_INCLUDED
-#define QE_CORE_ASSERT_H_INCLUDED
+#pragma once
 
 #include "LogManager.h"
 
@@ -37,5 +36,3 @@
 	#define QE_CORE_VERIFY(condition, ...)
 	#define QE_VERIFY(condition, ...)
 #endif
-
-#endif // QE_CORE_ASSERT_H_INCLUDED

@@ -3,9 +3,6 @@
 #include "Engine/Engine.h"
 #include "Core/LogManager.h"
 
-#include <fstream>
-
-
 void InitializeMainLoggers()
 {
 	using namespace QE;
@@ -40,8 +37,6 @@ int main(int argc, char** argv)
 	QE::gCounterTest = 1;
 	// Initialize logger system before anything else
 	InitializeMainLoggers();
-	//QE::Logger::CreateInfo ci;
-	//QE::Logger::Init(ci);
 	QE_CORE_DEBUG_TAG("GLOBAL", "Counter: {}", QE::gCounterTest);
 
 	// Initialize the engine context singleton

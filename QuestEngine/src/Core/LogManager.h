@@ -42,7 +42,7 @@ namespace QE
 		template<typename... Args>
 		constexpr void PrintMessage(const std::string_view loggerName, const LogManager::Level level, std::format_string<Args...> format, Args&&... args);
 		template<typename... Args>
-		constexpr void PrintMessageTag(const std::string_view loggerName, const LogManager::Level level, std::string_view tag, std::format_string<Args...> format, Args&&... args);
+		constexpr void PrintMessageTag(const std::string_view loggerName, const LogManager::Level level, const std::string_view tag, std::format_string<Args...> format, Args&&... args);
 		template<typename... Args>
 		constexpr void PrintAssertMessage(const std::string_view loggerName, const std::string_view failurePrefix, std::format_string<Args...> format, Args&&... args);
 	private:
@@ -155,7 +155,7 @@ namespace QE
 	}
 
 	template<typename ...Args>
-	inline constexpr void LogManager::PrintMessageTag(const std::string_view loggerName, const LogManager::Level level, std::string_view tag, std::format_string<Args...> format, Args&&... args)
+	inline constexpr void LogManager::PrintMessageTag(const std::string_view loggerName, const LogManager::Level level, const std::string_view tag, std::format_string<Args...> format, Args&&... args)
 	{
 		QLog::Logger* logger = GetOrCreateLogger(loggerName);
 		const std::string formatted = std::format(format, std::forward<Args>(args)...);
