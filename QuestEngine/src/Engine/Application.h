@@ -1,7 +1,7 @@
 #ifndef QUEST_CORE_APPLICATION_H_INCLUDED
 #define QUEST_CORE_APPLICATION_H_INCLUDED
 
-#include "Core/QuestCommon.h"
+#include "Core/Common.h"
 
 #include <memory>
 

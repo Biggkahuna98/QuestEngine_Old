@@ -1,5 +1,5 @@
 #include "Application.h"
-#include "Core/QuestCommon.h"
+#include "Core/Common.h"
 #include "Engine/Engine.h"
 
 #include <iostream>

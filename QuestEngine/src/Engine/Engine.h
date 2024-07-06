@@ -1,5 +1,5 @@
 #pragma once
-#include "Core/QuestCommon.h"
+#include "Core/Common.h"
 
 #include "Engine/Application.h"
 #include "Core/Window.h"

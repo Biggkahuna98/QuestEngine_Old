@@ -1,4 +1,4 @@
-#include "QuestCommon.h"
+#include "Common.h"
 #include "Window.h"
 
 #include "ThirdParty/GLFW.h"

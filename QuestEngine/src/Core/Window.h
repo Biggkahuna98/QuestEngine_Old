@@ -1,7 +1,7 @@
 #ifndef QUEST_CORE_WINDOW_H_INCLUDED
 #define QUEST_CORE_WINDOW_H_INCLUDED
 
-#include "QuestCommon.h"
+#include "Common.h"
 
 struct GLFWwindow;
 

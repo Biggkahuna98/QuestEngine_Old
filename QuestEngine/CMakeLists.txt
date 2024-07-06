@@ -54,9 +54,7 @@ set(VENDOR_INCLUDES
 	${QUEST_ROOT}/ThirdParty/Engine/spdlog/include/
 	${QUEST_ROOT}/ThirdParty/Engine/tracy/public/
 	#vendor/stb/
-	#vendor/tinyobjloader/
-
-	#${QUEST_ROOT}/VulkanRenderer/include/
+	#vendor/tinyobjloader
 )
 
 set(VULKAN_LIBRARIES
@@ -72,10 +70,6 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}  FILES ${VS_TREE})
 add_library(${TARGET_NAME} ${QUEST_LIBRARY_TYPE} ${SOURCES} ${HEADERS})
 set_target_properties(${TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 add_compile_options(-Wno-pragma-once-outside-header)
-#target_precompile_headers(${TARGET_NAME} 
-#    PRIVATE 
-#    "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/src/qepch.h>"
-#)
 
 target_compile_definitions(${TARGET_NAME} PRIVATE 
 	_SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS=1
@@ -93,7 +87,6 @@ target_compile_options(${TARGET_NAME} PRIVATE -W4 -Wno-c++98-compat -Wno-c++98-c
 
 target_link_libraries(${TARGET_NAME} PRIVATE ${Vulkan_LIBRARIES} ${QUEST_STATIC_LIBS})
 
-#include_directories(SYSTEM )
 target_include_directories(${TARGET_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/ ${CMAKE_CURRENT_SOURCE_DIR}/include/ ${Vulkan_INCLUDE_DIR} ${VENDOR_INCLUDES})
 #target_include_directories(${TARGET_NAME} PUBLIC ${SOURCES} ${HEADERS} ${Vulkan_INCLUDE_DIR} ${VENDOR_INCLUDES})
 message("Done building Quest Engine")

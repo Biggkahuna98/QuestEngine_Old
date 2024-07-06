@@ -7,6 +7,8 @@ if (WIN32)
     add_compile_definitions(QE_PLATFORM_WINDOWS)
 ENDIF()
 
+add_compile_definitions(QE_ROOT_DIR=${CMAKE_SOURCE_DIR})
+
 
 # Set project
 project(QuestEngine CXX)
@@ -17,7 +19,7 @@ add_compile_options(-MP -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-pragma
 
 
 # Set QUEST_ROOT from environment var
-set(QUEST_ROOT $ENV{QUEST_ENGINE_ROOT})
+set(QUEST_ROOT ${CMAKE_SOURCE_DIR})
 
 #--- VENDOR SUBDIRECTORIES ---#
 message("Building glfw...")

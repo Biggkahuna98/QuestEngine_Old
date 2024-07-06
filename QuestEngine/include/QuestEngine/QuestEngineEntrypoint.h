@@ -37,16 +37,12 @@ int main(int argc, char** argv)
 	QE::gCounterTest = 1;
 	// Initialize logger system before anything else
 	InitializeMainLoggers();
-	QE_CORE_DEBUG_TAG("GLOBAL", "Counter: {}", QE::gCounterTest);
 
 	// Initialize the engine context singleton
 	QE::Engine::Init();
 
 	// Run the main loop
 	QE::Engine::Get().Run();
-
-	// Deinit static systems
-	//QE::Logger::Shutdown();
 
 	// Shutdown the engine
 	QE::Engine::Shutdown();
