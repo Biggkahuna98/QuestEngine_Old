@@ -48,10 +48,9 @@ file (GLOB_RECURSE VS_TREE
 # vendor includes
 set(VENDOR_INCLUDES 
 	${QUEST_ROOT}/ThirdParty/Engine/glfw/include/
-	#vendor/imgui/
+	${QUEST_ROOT}/ThirdParty/Engine/imgui/
 	${QUEST_ROOT}/ThirdParty/Engine/glm/
 	${QUEST_ROOT}/ThirdParty/Engine/fmt/include/
-	${QUEST_ROOT}/ThirdParty/Engine/spdlog/include/
 	${QUEST_ROOT}/ThirdParty/Engine/tracy/public/
 	#vendor/stb/
 	#vendor/tinyobjloader
@@ -87,7 +86,8 @@ target_compile_options(${TARGET_NAME} PRIVATE -W4 -Wno-c++98-compat -Wno-c++98-c
 
 target_link_libraries(${TARGET_NAME} PRIVATE ${Vulkan_LIBRARIES} ${QUEST_STATIC_LIBS})
 
-target_include_directories(${TARGET_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/ ${CMAKE_CURRENT_SOURCE_DIR}/include/ ${Vulkan_INCLUDE_DIR} ${VENDOR_INCLUDES})
+target_include_directories(${TARGET_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/ ${CMAKE_CURRENT_SOURCE_DIR}/include/ ${Vulkan_INCLUDE_DIR} ${VENDOR_INCLUDES})
+target_include_directories(${TARGET_NAME} PUBLIC ${QUEST_ROOT}/ThirdParty/Engine/glm/)
 #target_include_directories(${TARGET_NAME} PUBLIC ${SOURCES} ${HEADERS} ${Vulkan_INCLUDE_DIR} ${VENDOR_INCLUDES})
 message("Done building Quest Engine")
 

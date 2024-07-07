@@ -10,4 +10,3 @@ git clone -b docking https://github.com/ocornut/imgui.git
 git clone https://github.com/g-truc/glm.git
 git clone git@github.com:alexsederquest98/ImGuizmo.git
 git clone https://github.com/glfw/glfw.git
-git clone https://github.com/gabime/spdlog.git
