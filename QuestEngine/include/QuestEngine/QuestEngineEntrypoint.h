@@ -8,7 +8,7 @@ void InitializeMainLoggers()
 	using namespace QE;
 	// Engine logger
 	LogManager::LoggerCreateInfo engineLoggerCI = {
-	.loggerName = "QUEST",
+	.loggerName = "Quest",
 	.logLevel = LogManager::Level::Trace,
 	.sinks = {
 		{QLog::SinkType::ColoredConsoleSink, "", true},
@@ -19,7 +19,7 @@ void InitializeMainLoggers()
 
 	// Application logger
 	LogManager::LoggerCreateInfo gameLoggerCI = {
-	.loggerName = "GAME",
+	.loggerName = "Game",
 	.logLevel = LogManager::Level::Trace,
 	.sinks = {
 		{QLog::SinkType::ColoredConsoleSink, "", true},

@@ -13,7 +13,7 @@ namespace QE
 		case LogManager::Level::Trace: return QLog::Level::Trace;
 		case LogManager::Level::Debug: return QLog::Level::Debug;
 		case LogManager::Level::Info: return QLog::Level::Info;
-		case LogManager::Level::Warn: return QLog::Level::Warn;
+		case LogManager::Level::Warning: return QLog::Level::Warn;
 		case LogManager::Level::Error: return QLog::Level::Error;
 		case LogManager::Level::Fatal: return QLog::Level::Fatal;
 		}
@@ -66,14 +66,14 @@ namespace QE
 		QE_CORE_TRACE("{} {}", "Core:", "Trace");
 		QE_CORE_DEBUG("{} {}", "Core:", "Debug");
 		QE_CORE_INFO("{} {}", "Core:", "Info");
-		QE_CORE_WARN("{} {}", "Core:", "Warn");
+		QE_CORE_WARNING("{} {}", "Core:", "Warning");
 		QE_CORE_ERROR("{} {}", "Core:", "Error");
 		QE_CORE_FATAL("{} {}", "Core:", "Fatal");
 
 		QE_CORE_TRACE_TAG("Test", "{} {}", "Core Tag:", "Trace");
 		QE_CORE_DEBUG_TAG("Test", "{} {}", "Core Tag:", "Debug");
 		QE_CORE_INFO_TAG("Test", "{} {}", "Core Tag:", "Info");
-		QE_CORE_WARN_TAG("Test", "{} {}", "Core Tag:", "Warn");
+		QE_CORE_WARNING_TAG("Test", "{} {}", "Core Tag:", "Warning");
 		QE_CORE_ERROR_TAG("Test", "{} {}", "Core Tag:", "Error");
 		QE_CORE_FATAL_TAG("Test", "{} {}", "Core Tag:", "Fatal");
 
@@ -81,14 +81,14 @@ namespace QE
 		QE_TRACE("{} {}", "Client:", "Trace");
 		QE_DEBUG("{} {}", "Client:", "Debug");
 		QE_INFO("{} {}", "Client:", "Info");
-		QE_WARN("{} {}", "Client:", "Warn");
+		QE_WARNING("{} {}", "Client:", "Warning");
 		QE_ERROR("{} {}", "Client:", "Error");
 		QE_FATAL("{} {}", "Client:", "Fatal");
 
 		QE_TRACE_TAG("Test", "{} {}", "Client Tag:", "Trace");
 		QE_DEBUG_TAG("Test", "{} {}", "Client Tag:", "Debug");
 		QE_INFO_TAG("Test", "{} {}", "Client Tag:", "Info");
-		QE_WARN_TAG("Test", "{} {}", "Client Tag:", "Warn");
+		QE_WARNING_TAG("Test", "{} {}", "Client Tag:", "Warning");
 		QE_ERROR_TAG("Test", "{} {}", "Client Tag:", "Error");
 		QE_FATAL_TAG("Test", "{} {}", "Client Tag:", "Fatal");
 	}

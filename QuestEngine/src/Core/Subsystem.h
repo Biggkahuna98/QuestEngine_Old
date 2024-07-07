@@ -4,17 +4,17 @@
 
 namespace QE
 {
-	class Layer
+	class Subsystem
 	{
 	public:
-		Layer(const std::string& name = "QuestLayer") :
+		Subsystem(const std::string& name = "QuestSubsystem") :
 			m_DebugName(name)
 		{
 		}
-		virtual ~Layer() = 0;
+		virtual ~Subsystem() = 0;
 
-		virtual void OnAttach() = 0;
-		virtual void OnDetach() = 0;
+		virtual void Initialize() = 0;
+		virtual void Shutdown() = 0;
 		virtual void OnTick() = 0;
 		virtual void OnImGuiRender() = 0;
 

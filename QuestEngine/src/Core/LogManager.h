@@ -17,7 +17,7 @@ namespace QE
 	public:
 		enum class Level : uint8
 		{
-			Trace = 0, Debug, Info, Warn, Error, Fatal
+			Trace = 0, Debug, Info, Warning, Error, Fatal
 		};
 
 		struct LoggerCreateInfo
@@ -64,36 +64,42 @@ namespace QE
 // ********************************************************************
 
 // Core
-#define QE_CORE_TRACE_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("QUEST", ::QE::LogManager::Level::Trace, tag, __VA_ARGS__)
-#define QE_CORE_DEBUG_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("QUEST", ::QE::LogManager::Level::Debug, tag, __VA_ARGS__)
-#define QE_CORE_INFO_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("QUEST", ::QE::LogManager::Level::Info, tag, __VA_ARGS__)
-#define QE_CORE_WARN_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("QUEST", ::QE::LogManager::Level::Warn, tag, __VA_ARGS__)
-#define QE_CORE_ERROR_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("QUEST", ::QE::LogManager::Level::Error, tag, __VA_ARGS__)
-#define QE_CORE_FATAL_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("QUEST", ::QE::LogManager::Level::Fatal, tag, __VA_ARGS__)
+#define QE_CORE_TRACE_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("Quest", ::QE::LogManager::Level::Trace, tag, __VA_ARGS__)
+#define QE_CORE_DEBUG_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("Quest", ::QE::LogManager::Level::Debug, tag, __VA_ARGS__)
+#define QE_CORE_INFO_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("Quest", ::QE::LogManager::Level::Info, tag, __VA_ARGS__)
+#define QE_CORE_WARNING_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("Quest", ::QE::LogManager::Level::Warning, tag, __VA_ARGS__)
+#define QE_CORE_ERROR_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("Quest", ::QE::LogManager::Level::Error, tag, __VA_ARGS__)
+#define QE_CORE_FATAL_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("Quest", ::QE::LogManager::Level::Fatal, tag, __VA_ARGS__)
 
 // Game
-#define QE_TRACE_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("GAME", ::QE::LogManager::Level::Trace, tag, __VA_ARGS__)
-#define QE_DEBUG_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("GAME", ::QE::LogManager::Level::Debug, tag, __VA_ARGS__)
-#define QE_INFO_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("GAME", ::QE::LogManager::Level::Info, tag, __VA_ARGS__)
-#define QE_WARN_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("GAME", ::QE::LogManager::Level::Warn, tag, __VA_ARGS__)
-#define QE_ERROR_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("GAME", ::QE::LogManager::Level::Error, tag, __VA_ARGS__)
-#define QE_FATAL_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("GAME", ::QE::LogManager::Level::Fatal, tag, __VA_ARGS__)
+#define QE_TRACE_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("Game", ::QE::LogManager::Level::Trace, tag, __VA_ARGS__)
+#define QE_DEBUG_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("Game", ::QE::LogManager::Level::Debug, tag, __VA_ARGS__)
+#define QE_INFO_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("Game", ::QE::LogManager::Level::Info, tag, __VA_ARGS__)
+#define QE_WARNING_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("Game", ::QE::LogManager::Level::Warning, tag, __VA_ARGS__)
+#define QE_ERROR_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("Game", ::QE::LogManager::Level::Error, tag, __VA_ARGS__)
+#define QE_FATAL_TAG(tag, ...) ::QE::LogManager::Get().PrintMessageTag("Game", ::QE::LogManager::Level::Fatal, tag, __VA_ARGS__)
 
 // Core
-#define QE_CORE_TRACE(...) ::QE::LogManager::Get().PrintMessage("QUEST", ::QE::LogManager::Level::Trace, __VA_ARGS__)
-#define QE_CORE_DEBUG(...) ::QE::LogManager::Get().PrintMessage("QUEST", ::QE::LogManager::Level::Debug, __VA_ARGS__)
-#define QE_CORE_INFO(...) ::QE::LogManager::Get().PrintMessage("QUEST", ::QE::LogManager::Level::Info,__VA_ARGS__)
-#define QE_CORE_WARN(...) ::QE::LogManager::Get().PrintMessage("QUEST", ::QE::LogManager::Level::Warn, __VA_ARGS__)
-#define QE_CORE_ERROR(...) ::QE::LogManager::Get().PrintMessage("QUEST", ::QE::LogManager::Level::Error, __VA_ARGS__)
-#define QE_CORE_FATAL(...) ::QE::LogManager::Get().PrintMessage("QUEST", ::QE::LogManager::Level::Fatal, __VA_ARGS__)
+#define QE_CORE_TRACE(...) ::QE::LogManager::Get().PrintMessage("Quest", ::QE::LogManager::Level::Trace, __VA_ARGS__)
+#define QE_CORE_DEBUG(...) ::QE::LogManager::Get().PrintMessage("Quest", ::QE::LogManager::Level::Debug, __VA_ARGS__)
+#define QE_CORE_INFO(...) ::QE::LogManager::Get().PrintMessage("Quest", ::QE::LogManager::Level::Info,__VA_ARGS__)
+#define QE_CORE_WARNING(...) ::QE::LogManager::Get().PrintMessage("Quest", ::QE::LogManager::Level::Warning, __VA_ARGS__)
+#define QE_CORE_ERROR(...) ::QE::LogManager::Get().PrintMessage("Quest", ::QE::LogManager::Level::Error, __VA_ARGS__)
+#define QE_CORE_FATAL(...) ::QE::LogManager::Get().PrintMessage("Quest", ::QE::LogManager::Level::Fatal, __VA_ARGS__)
 
 // Game
-#define QE_TRACE(...) ::QE::LogManager::Get().PrintMessage("GAME", ::QE::LogManager::Level::Trace, __VA_ARGS__)
-#define QE_DEBUG(...) ::QE::LogManager::Get().PrintMessage("GAME", ::QE::LogManager::Level::Debug, __VA_ARGS__)
-#define QE_INFO(...) ::QE::LogManager::Get().PrintMessage("GAME", ::QE::LogManager::Level::Info, __VA_ARGS__)
-#define QE_WARN(...) ::QE::LogManager::Get().PrintMessage("GAME", ::QE::LogManager::Level::Warn, __VA_ARGS__)
-#define QE_ERROR(...) ::QE::LogManager::Get().PrintMessage("GAME", ::QE::LogManager::Level::Error, __VA_ARGS__)
-#define QE_FATAL(...) ::QE::LogManager::Get().PrintMessage("GAME", ::QE::LogManager::Level::Fatal, __VA_ARGS__)
+#define QE_TRACE(...) ::QE::LogManager::Get().PrintMessage("Game", ::QE::LogManager::Level::Trace, __VA_ARGS__)
+#define QE_DEBUG(...) ::QE::LogManager::Get().PrintMessage("Game", ::QE::LogManager::Level::Debug, __VA_ARGS__)
+#define QE_INFO(...) ::QE::LogManager::Get().PrintMessage("Game", ::QE::LogManager::Level::Info, __VA_ARGS__)
+#define QE_WARNING(...) ::QE::LogManager::Get().PrintMessage("Game", ::QE::LogManager::Level::Warning, __VA_ARGS__)
+#define QE_ERROR(...) ::QE::LogManager::Get().PrintMessage("Game", ::QE::LogManager::Level::Error, __VA_ARGS__)
+#define QE_FATAL(...) ::QE::LogManager::Get().PrintMessage("Game", ::QE::LogManager::Level::Fatal, __VA_ARGS__)
+
+#define __LOGGER_STRINGIFY(x) #x
+#define __LOGGER_LITERAL(x) x
+// Shorthand logging macros
+#define QE_LOG(logger, level, ...) ::QE::LogManager::Get().PrintMessage(__LOGGER_STRINGIFY(logger), ::QE::LogManager::Level::__LOGGER_LITERAL(level), __VA_ARGS__)
+#define QE_LOG_TAG(logger, level, tag, ...) ::QE::LogManager::Get().PrintMessageTag(__LOGGER_STRINGIFY(logger), ::QE::LogManager::Level::__LOGGER_LITERAL(level), tag, __VA_ARGS__)
 
 namespace QE
 {
@@ -142,7 +148,7 @@ namespace QE
 		case Level::Info:
 			logger->Info(formatted);
 			break;
-		case Level::Warn:
+		case Level::Warning:
 			logger->Warn(formatted);
 			break;
 		case Level::Error:
@@ -170,7 +176,7 @@ namespace QE
 		case Level::Info:
 			logger->Info("[{0}] - {1}", tag, formatted);
 			break;
-		case Level::Warn:
+		case Level::Warning:
 			logger->Warn("[{0}] - {1}", tag, formatted);
 			break;
 		case Level::Error:
