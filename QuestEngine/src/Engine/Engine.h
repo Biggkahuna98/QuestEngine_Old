@@ -7,22 +7,26 @@
 
 namespace QE
 {
-	// The context of the engine, manager of managers and everything else
-	// And yes, it is a global singleton.
+	// The context of the engine, manager of managers and everything else, the Root object
+	// And yes, it is a singleton.
 	class Engine
 	{
 	public:
-		// Initialized and shut down explicitely
-		Engine();
-		~Engine();
-		//static void Init();
-		//static void Shutdown();
-		//static Engine& Get();
-		//static Engine* GetPtr();
+		~Engine() = default;
+		Engine(Engine const&) = delete;
+		void operator=(Engine const&) = delete;
+
+		static Engine& Get();
+		static Engine* GetPtr();
+
+		void Initialize();
+		void Shutdown();
 
 		// This is the game loop
 		void Run();
 
+		// These pointers/references are guaranteed to exist for the entire lifetime of the program
+		// So if you choose you can grab a pointer to one of  these and just store it
 		Application& GetApplication();
 		Application* GetApplicationPtr();
 		Window& GetWindow();
@@ -30,8 +34,8 @@ namespace QE
 		InputManager& GetInputManager();
 		InputManager* GetInputManagerPtr();
 	private:
-		//Engine() {} // private to make singleton
-		//static Engine* s_Instance;
+		Engine() {}
+
 		bool m_Running = true;
 
 		// Baseline engine systems

@@ -166,4 +166,23 @@ namespace QE
 			ButtonMiddle = Button2
 		};
 	}
+
+	enum class KeyState
+	{
+		None = -1,
+		Pressed,
+		Held,
+		Released
+	};
+
+	inline const char* GetKeyStateString(KeyState state)
+	{
+		switch (state)
+		{
+		case KeyState::None: return "None";
+		case KeyState::Pressed: return "Pressed";
+		case KeyState::Held: return "Held";
+		case KeyState::Released: return "Released";
+		}
+	}
 }

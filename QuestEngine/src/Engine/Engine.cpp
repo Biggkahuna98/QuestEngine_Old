@@ -2,54 +2,45 @@
 
 #include "Core/LogManager.h"
 #include "Core/Profiler.h"
-#include "Core/Globals.h"
 
-//QE::Engine* QE::Engine::s_Instance = nullptr;
 
 namespace QE
 {
-	Engine::Engine()
+	Engine& Engine::Get()
 	{
-		// Explicitely create the static instance
-		//s_Instance = new Engine();
+		static Engine instance;
+		return instance;
+	}
 
+	Engine* Engine::GetPtr()
+	{
+		static Engine instance;
+		return &instance;
+	}
+
+	void Engine::Initialize()
+	{
 		// Create the application by user-provided function
 		m_Application = CreateApplication();
 		m_Window = CreateScopedPtr<Window>(Window::CreateInfo());
 		// Initialize other managers
 		m_InputManager = CreateScopedPtr<InputManager>(m_Window->GetNativeWindow());
-		gCounterTest++;
-		QE_CORE_DEBUG_TAG("GLOBAL", "Counter: {}", QE::gCounterTest);
 	}
 
-	Engine::~Engine()
+	void Engine::Shutdown()
 	{
 
 	}
-
-	/*Engine& Engine::Get()
-	{
-		return *s_Instance;
-	}
-
-	Engine* Engine::GetPtr()
-	{
-		return s_Instance;
-	}*/
 
 	void Engine::Run()
 	{
 		while (m_Running)
 		{
-			gCounterTest++;
-
+			m_InputManager->ProcessTransitions(); // Must be called before window process events
 			m_Window->ProcessEvents();
-			//QE_CORE_DEBUG_TAG("GLOBAL", "Counter: {}", Quest::gCounterTest);
 			// Check if we should close
 			if (m_InputManager->IsKeyPressed(Key::Escape))
 				m_Running = false;
-			if (m_InputManager->IsKeyPressed(Key::A))
-				QE_CORE_DEBUG_TAG("INPUT", "{}", "A was pressed");
 
 			m_Window->SwapBuffers();
 			//QE_PROFILE_FRAME;

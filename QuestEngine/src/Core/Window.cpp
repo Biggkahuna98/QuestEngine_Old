@@ -3,6 +3,8 @@
 
 #include "ThirdParty/GLFW.h"
 
+#include "Engine/Engine.h"
+
 namespace QE
 {
 	// GLFW error function
@@ -54,7 +56,25 @@ namespace QE
 
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 			{
-
+				auto inputManager = Engine::Get().GetInputManagerPtr();
+				switch (action)
+				{
+					case GLFW_PRESS:
+					{
+						inputManager->UpdateKeyState(static_cast<KeyCode>(key), KeyState::Pressed);
+						break;
+					}
+					case GLFW_RELEASE:
+					{
+						inputManager->UpdateKeyState(static_cast<KeyCode>(key), KeyState::Released);
+						break;
+					}
+					case GLFW_REPEAT:
+					{
+						inputManager->UpdateKeyState(static_cast<KeyCode>(key), KeyState::Held);
+						break;
+					}	
+				}
 			}
 		);
 
@@ -66,7 +86,20 @@ namespace QE
 
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
 			{
-
+				auto inputManager = Engine::Get().GetInputManagerPtr();
+				switch (action)
+				{
+					case GLFW_PRESS:
+					{
+						inputManager->UpdateButtonState(static_cast<MouseCode>(button), KeyState::Pressed);
+						break;
+					}
+					case GLFW_RELEASE:
+					{
+						inputManager->UpdateButtonState(static_cast<MouseCode>(button), KeyState::Released);
+						break;
+					}
+				}
 			}
 		);
 

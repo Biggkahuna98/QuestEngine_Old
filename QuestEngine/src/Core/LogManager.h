@@ -99,7 +99,7 @@ namespace QE
 #define __LOGGER_LITERAL(x) x
 // Shorthand logging macros
 #define QE_LOG(logger, level, ...) ::QE::LogManager::Get().PrintMessage(__LOGGER_STRINGIFY(logger), ::QE::LogManager::Level::__LOGGER_LITERAL(level), __VA_ARGS__)
-#define QE_LOG_TAG(logger, level, tag, ...) ::QE::LogManager::Get().PrintMessageTag(__LOGGER_STRINGIFY(logger), ::QE::LogManager::Level::__LOGGER_LITERAL(level), tag, __VA_ARGS__)
+#define QE_LOG_TAG(logger, level, tag, ...) ::QE::LogManager::Get().PrintMessageTag(__LOGGER_STRINGIFY(logger), ::QE::LogManager::Level::__LOGGER_LITERAL(level), __LOGGER_STRINGIFY(tag), __VA_ARGS__)
 
 namespace QE
 {
