@@ -2,32 +2,32 @@
 
 #include "Core/LogManager.h"
 #include "Core/Profiler.h"
+#include "Core/Globals.h"
 
-QE::Engine* QE::Engine::s_Instance = nullptr;
+//QE::Engine* QE::Engine::s_Instance = nullptr;
 
 namespace QE
 {
-	void Engine::Init()
+	Engine::Engine()
 	{
 		// Explicitely create the static instance
-		s_Instance = new Engine();
+		//s_Instance = new Engine();
 
 		// Create the application by user-provided function
-		s_Instance->m_Application = CreateApplication();
-		s_Instance->m_Window = CreateScopedPtr<Window>(Window::CreateInfo());
+		m_Application = CreateApplication();
+		m_Window = CreateScopedPtr<Window>(Window::CreateInfo());
 		// Initialize other managers
-		s_Instance->m_InputManager = CreateScopedPtr<InputManager>(s_Instance->m_Window->GetNativeWindow());
+		m_InputManager = CreateScopedPtr<InputManager>(m_Window->GetNativeWindow());
 		gCounterTest++;
 		QE_CORE_DEBUG_TAG("GLOBAL", "Counter: {}", QE::gCounterTest);
 	}
 
-	void Engine::Shutdown()
+	Engine::~Engine()
 	{
-		// Delete the instance
-		delete s_Instance;
+
 	}
 
-	Engine& Engine::Get()
+	/*Engine& Engine::Get()
 	{
 		return *s_Instance;
 	}
@@ -35,7 +35,7 @@ namespace QE
 	Engine* Engine::GetPtr()
 	{
 		return s_Instance;
-	}
+	}*/
 
 	void Engine::Run()
 	{

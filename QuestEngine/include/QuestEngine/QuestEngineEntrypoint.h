@@ -2,6 +2,7 @@
 
 #include "Engine/Engine.h"
 #include "Core/LogManager.h"
+#include "Core/Globals.h"
 
 void InitializeMainLoggers()
 {
@@ -32,20 +33,21 @@ void InitializeMainLoggers()
 // THE ENTRYPOINT FOR THE ENGINE
 // Initialize the engine systems and then create the user-defined application
 int QE::gCounterTest = 0;
+
 int main(int argc, char** argv)
 {
 	QE::gCounterTest = 1;
 	// Initialize logger system before anything else
 	InitializeMainLoggers();
 
-	// Initialize the engine context singleton
-	QE::Engine::Init();
+	// Initialize the engine context global
+	QE::Engine g_Engine;
 
 	// Run the main loop
-	QE::Engine::Get().Run();
+	g_Engine.Run();
 
 	// Shutdown the engine
-	QE::Engine::Shutdown();
+	//QE::g_Engine.Shutdown();
 
 	return 0;
 }

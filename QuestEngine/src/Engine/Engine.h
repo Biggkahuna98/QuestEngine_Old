@@ -7,18 +7,18 @@
 
 namespace QE
 {
-	extern int gCounterTest;
 	// The context of the engine, manager of managers and everything else
 	// And yes, it is a global singleton.
 	class Engine
 	{
 	public:
 		// Initialized and shut down explicitely
-		~Engine() {}
-		static void Init();
-		static void Shutdown();
-		static Engine& Get();
-		static Engine* GetPtr();
+		Engine();
+		~Engine();
+		//static void Init();
+		//static void Shutdown();
+		//static Engine& Get();
+		//static Engine* GetPtr();
 
 		// This is the game loop
 		void Run();
@@ -30,8 +30,8 @@ namespace QE
 		InputManager& GetInputManager();
 		InputManager* GetInputManagerPtr();
 	private:
-		Engine() {} // private to make singleton
-		static Engine* s_Instance;
+		//Engine() {} // private to make singleton
+		//static Engine* s_Instance;
 		bool m_Running = true;
 
 		// Baseline engine systems
