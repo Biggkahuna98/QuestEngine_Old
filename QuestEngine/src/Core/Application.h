@@ -1,5 +1,4 @@
-#ifndef QUEST_CORE_APPLICATION_H_INCLUDED
-#define QUEST_CORE_APPLICATION_H_INCLUDED
+#pragma once
 
 #include "Core/Common.h"
 
@@ -27,5 +26,3 @@ namespace QE
 }
 
 extern std::unique_ptr<QE::Application> CreateApplication();
-
-#endif // QUEST_CORE_APPLICATION_H_INCLUDED

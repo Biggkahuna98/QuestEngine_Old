@@ -37,7 +37,6 @@ namespace QE
 		bool IsKeyDown(KeyCode key);
 		bool IsKeyReleased(KeyCode key);
 
-		//bool IsKeyPressed(KeyCode key);
 		bool IsMouseButtonPressed(MouseCode button);
 		bool IsMouseButtonHeld(MouseCode button);
 		bool IsMouseButtonDown(MouseCode button);
