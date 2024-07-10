@@ -1,4 +1,3 @@
-// NOLINTBEGIN
 #include "SandboxApp.h"
 
 #include <QuestEngine/QuestEngine.h>
@@ -25,5 +24,3 @@ std::unique_ptr<QE::Application> CreateApplication()
 { 
 	return std::make_unique<SandboxApp>(); 
 }
-
-// NOLINTEND
