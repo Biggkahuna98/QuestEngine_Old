@@ -15,7 +15,6 @@ endif()
 
 set (QUEST_STATIC_LIBS
 	glfw
-	#VulkanRenderer
 )
 
 message("Building Quest Engine static library...")
@@ -28,7 +27,6 @@ file (GLOB_RECURSE SOURCES
 	src/*.hpp
 	src/*.cpp 
 )
-list (APPEND SOURCES ${QUEST_ROOT}/ThirdParty/Engine/tracy/public/TracyClient.cpp)
 
 file (GLOB_RECURSE HEADERS
 	include/*.hpp
@@ -56,6 +54,32 @@ set(VENDOR_INCLUDES
 	#vendor/tinyobjloader
 )
 
+# imgui
+set (IMGUI_FILES
+	${QUEST_ROOT}/ThirdParty/Engine/imgui/imconfig.h
+	${QUEST_ROOT}/ThirdParty/Engine/imgui/imgui.cpp
+	${QUEST_ROOT}/ThirdParty/Engine/imgui/imgui.h
+	${QUEST_ROOT}/ThirdParty/Engine/imgui/imgui_demo.cpp
+	${QUEST_ROOT}/ThirdParty/Engine/imgui/imgui_draw.cpp
+	${QUEST_ROOT}/ThirdParty/Engine/imgui/imgui_internal.h
+	${QUEST_ROOT}/ThirdParty/Engine/imgui/imgui_tables.cpp
+	${QUEST_ROOT}/ThirdParty/Engine/imgui/imgui_widgets.cpp
+	${QUEST_ROOT}/ThirdParty/Engine/imgui/imstb_rectpack.h
+	${QUEST_ROOT}/ThirdParty/Engine/imgui/imstb_textedit.h
+	${QUEST_ROOT}/ThirdParty/Engine/imgui/imstb_truetype.h
+
+	${QUEST_ROOT}/ThirdParty/Engine/imgui/backends/imgui_impl_vulkan.h
+	${QUEST_ROOT}/ThirdParty/Engine/imgui/backends/imgui_impl_vulkan.cpp
+	${QUEST_ROOT}/ThirdParty/Engine/imgui/backends/imgui_impl_glfw.h
+	${QUEST_ROOT}/ThirdParty/Engine/imgui/backends/imgui_impl_glfw.cpp
+
+	${QUEST_ROOT}/ThirdParty/Engine/imgui/misc/cpp/imgui_stdlib.h
+	${QUEST_ROOT}/ThirdParty/Engine/imgui/misc/cpp/imgui_stdlib.cpp
+)
+
+# tracy
+list (APPEND SOURCES ${QUEST_ROOT}/ThirdParty/Engine/tracy/public/TracyClient.cpp)
+
 set(VULKAN_LIBRARIES
 	${Vulkan_LIBRARY}
 	${Vulkan_glslang_LIBRARY}
@@ -66,7 +90,7 @@ set(VULKAN_LIBRARIES
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}  FILES ${VS_TREE})
 
 
-add_library(${TARGET_NAME} ${QUEST_LIBRARY_TYPE} ${SOURCES} ${HEADERS})
+add_library(${TARGET_NAME} ${QUEST_LIBRARY_TYPE} ${SOURCES} ${HEADERS} ${IMGUI_FILES})
 set_target_properties(${TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 add_compile_options(-Wno-pragma-once-outside-header)
 
@@ -86,7 +110,7 @@ target_compile_options(${TARGET_NAME} PRIVATE -W4 -Wno-c++98-compat -Wno-c++98-c
 
 target_link_libraries(${TARGET_NAME} PRIVATE ${Vulkan_LIBRARIES} ${QUEST_STATIC_LIBS})
 
-target_include_directories(${TARGET_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/ ${CMAKE_CURRENT_SOURCE_DIR}/include/ ${Vulkan_INCLUDE_DIR} ${VENDOR_INCLUDES})
+target_include_directories(${TARGET_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/ ${CMAKE_CURRENT_SOURCE_DIR}/include/ ${Vulkan_INCLUDE_DIR} ${VENDOR_INCLUDES} ${IMGUI_FILES})
 target_include_directories(${TARGET_NAME} PUBLIC ${QUEST_ROOT}/ThirdParty/Engine/glm/)
 #target_include_directories(${TARGET_NAME} PUBLIC ${SOURCES} ${HEADERS} ${Vulkan_INCLUDE_DIR} ${VENDOR_INCLUDES})
 message("Done building Quest Engine")
